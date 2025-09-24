@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Montserrat:wght@400;700&display=swap');
+
+:root {
+  /* Paleta de Colores */
+  --color-background: #f7f5ed; /* Crema */
+  --color-text: #43304a;       /* Púrpura oscuro */
+  --color-primary: #ebbe6f;    /* Ocre dorado */
+  --color-secondary: #75a6a8;  /* Verde azulado */
+  --color-accent: #81536F;      /* Malva */
+  --color-surface: #FFFFFF;    /* Blanco para superficies como cards */
+  --color-light-gray: #f8f9fa; /* Un gris muy claro para fondos sutiles */
+
+  /* Variaciones de color */
+  --color-primary-dark: #d4a95a; /* Ocre dorado más oscuro para hover */
+  --color-text-secondary: #6a5472; /* Púrpura más suave para texto secundario */
+
+  /* Sistema Tipográfico */
+  --font-family-heading: 'Petit Formal Script', cursive;
+  --font-family-body: 'Montserrat', sans-serif;
+
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.75rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.875rem;
+  
+  --line-height-base: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.75rem;
+    --font-size-h3: 1.5rem;
+    --font-size-base: 0.95rem;
+  }
+  
+  body {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --font-size-h1: 1.75rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.25rem;
+    --font-size-base: 0.9rem;
+  }
+}
+
+/* Ensure proper mobile viewport */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Better button spacing on mobile */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+}

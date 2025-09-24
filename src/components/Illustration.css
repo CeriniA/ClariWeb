@@ -1,0 +1,118 @@
+/* Estilos base para ilustraciones */
+.illustration {
+  transition: all 0.3s ease;
+}
+
+/* Animaciones sutiles */
+.illustration-animate {
+  animation: floatAnimation 6s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hover effects */
+.illustration:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .illustration {
+    max-width: 60px;
+  }
+  
+  /* Adjust illustration sizes in different contexts */
+  .hero-text-content .illustration {
+    max-width: 40px;
+  }
+  
+  .service-card .illustration {
+    max-width: 60px;
+  }
+  
+  /* Disable animations on mobile for better performance */
+  .illustration-animate {
+    animation: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .illustration {
+    max-width: 50px;
+  }
+  
+  .hero-text-content .illustration {
+    max-width: 35px;
+  }
+  
+  .service-card .illustration {
+    max-width: 50px;
+  }
+}
+
+/* Decorative elements positioning */
+.illustration-decorative {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.illustration-decorative.top-left {
+  top: -20px;
+  left: -20px;
+}
+
+.illustration-decorative.top-right {
+  top: -20px;
+  right: -20px;
+}
+
+.illustration-decorative.bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+
+.illustration-decorative.bottom-right {
+  bottom: -20px;
+  right: -20px;
+}
+
+/* Fade in animation */
+.illustration-fade-in {
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse animation for accent elements */
+.illustration-pulse {
+  animation: pulseAnimation 3s ease-in-out infinite;
+}
+
+@keyframes pulseAnimation {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}

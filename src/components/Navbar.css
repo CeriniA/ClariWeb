@@ -1,0 +1,144 @@
+.navbar-transparent {
+  background-color: transparent !important;
+  padding: 15px 0; /* Añadimos padding vertical */
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-transparent .navbar-brand,
+.navbar-transparent .nav-link {
+  color: white !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+.navbar-transparent .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Estilo para cuando la navbar se vuelve sólida con el scroll (lo implementaremos después) */
+.navbar-solid {
+  background-color: var(--color-surface) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 5px 0; /* Un padding más pequeño cuando es sólida */
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-solid .navbar-brand,
+.navbar-solid .nav-link {
+  color: var(--color-text) !important;
+}
+
+.navbar-solid .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+
+/* --- Estilo del Logo --- */
+.navbar-logo {
+  height: 75px; /* Aumentado 50% desde 50px */
+  transition: all 0.3s ease;
+  transform: translateY(-8px); /* Desplazar hacia arriba en desktop */
+}
+
+/* Responsive Navbar Styles for tablets */
+@media (max-width: 991px) and (min-width: 769px) {
+  .navbar-logo {
+    height: 70px; /* Logo intermedio para tablets */
+    transform: translateY(-8px); /* Desplazar hacia arriba igual que desktop */
+  }
+}
+
+/* Responsive Navbar Styles */
+@media (max-width: 768px) {
+  /* Navbar con fondo sólido en móvil para mejor visibilidad */
+  .navbar-transparent {
+    background-color: rgba(67, 48, 74, 0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-transparent,
+  .navbar-solid {
+    padding: 10px 0;
+  }
+  
+  /* Mantener texto blanco en navbar transparente móvil */
+  .navbar-transparent .navbar-brand,
+  .navbar-transparent .nav-link {
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  }
+  
+  .navbar-transparent .nav-link:hover {
+    color: var(--color-primary) !important;
+  }
+  
+  .navbar-logo {
+    height: 60px; /* Logo más pequeño en móvil (aumentado 50% desde 40px) */
+    transform: translateY(0); /* Reset transform en móvil */
+  }
+  
+  /* Mejores estilos para el menú hamburguesa */
+  .navbar-transparent .navbar-toggler {
+    border: 2px solid white !important;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+  }
+  
+  .navbar-solid .navbar-toggler {
+    border: 2px solid var(--color-text) !important;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+  }
+  
+  .navbar-transparent .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+  }
+  
+  .navbar-solid .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(67, 48, 74, 0.25);
+  }
+  
+  .navbar-transparent .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+  
+  .navbar-solid .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2343304a' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+  
+  /* Estilos para el menú colapsado */
+  .navbar-collapse {
+    margin-top: 1rem;
+    background-color: rgba(67, 48, 74, 0.98);
+    border-radius: 8px;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white !important;
+    font-weight: 500;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    background-color: rgba(235, 190, 111, 0.2);
+    color: var(--color-primary) !important;
+  }
+  
+  .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-logo {
+    height: 52px; /* Logo aún más pequeño en pantallas muy pequeñas (aumentado 50% desde 35px) */
+    transform: translateY(0); /* Reset transform en móvil pequeño */
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+}
