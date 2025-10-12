@@ -1,0 +1,611 @@
+/* --- Keyframes para Animaciones --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- Hero Section a Pantalla Completa --- */
+.hero-section {
+  position: relative;
+  min-height: 100vh; /* Cambiar a min-height para permitir expansión */
+  height: auto; /* Permitir altura automática */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  padding: 80px 0 40px 0; /* Padding arriba y abajo */
+}
+
+/* Contenedor de imágenes de fondo */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Usar 100vh en lugar de 100% */
+  z-index: -2;
+}
+
+.hero-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Usar 100vh para cubrir toda la pantalla */
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.hero-background-image.active {
+  opacity: 1;
+}
+
+/* Overlay para mejorar contraste del texto */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Usar 100vh para cubrir toda la pantalla */
+  background: linear-gradient(
+    135deg,
+    rgba(67, 48, 74, 0.4) 0%,
+    rgba(129, 83, 111, 0.3) 50%,
+    rgba(235, 190, 111, 0.2) 100%
+  );
+  z-index: -1;
+}
+
+/* Contenido del hero centrado */
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 0 2rem;
+  z-index: 1;
+}
+
+/* Estilos para el texto del hero centrado */
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Tamaño responsivo automático */
+  font-weight: normal;
+  line-height: 1.1; /* Línea más compacta para títulos largos */
+  margin-bottom: clamp(1rem, 3vw, 1.5rem); /* Margen responsivo */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  max-width: 100%; /* Asegurar que no se desborde */
+  word-wrap: break-word; /* Romper palabras largas si es necesario */
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem); /* Tamaño responsivo */
+  line-height: 1.5; /* Más compacto */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
+}
+
+.hero-content .btn {
+  font-size: clamp(0.9rem, 2vw, 1.1rem); /* Botón responsivo */
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem); /* Padding responsivo */
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Información del retiro más compacta */
+.hero-content .mb-4.p-4 {
+  margin-bottom: clamp(0.8rem, 2vw, 1.5rem) !important;
+  padding: clamp(0.8rem, 2vw, 1.5rem) !important;
+  max-width: 100%;
+  font-size: 0.9rem; /* Base más pequeña */
+}
+
+.hero-content .mb-4.p-4 .d-flex {
+  gap: clamp(0.5rem, 2vw, 1.5rem) !important;
+}
+
+.hero-content .mb-4.p-4 small {
+  font-size: clamp(0.65rem, 1.2vw, 0.75rem) !important;
+  opacity: 0.8;
+}
+
+.hero-content .mb-4.p-4 div[style*="fontSize"] {
+  font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+}
+
+.hero-content .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* --- Estilos de Botones con Transiciones --- */
+.hero-section .btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  /* El color del texto lo hereda de .navbar-transparent y es blanco, lo cual es correcto */
+}
+
+.hero-section .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* Estilo para botones en secciones con fondo claro */
+.about-section .btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  /* Color de texto más suave */
+  font-weight: normal;
+  /* Texto más fino */
+}
+
+.about-section .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-text-secondary);
+}
+
+/* --- About Section --- */
+.about-section {
+  padding: 4rem 0;
+  background-color: var(--color-surface);
+}
+
+.about-carousel {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.about-carousel .carousel-item img {
+  height: 450px;
+  /* Altura fija para todas las imágenes del carrusel */
+  object-fit: cover;
+  /* Asegura que la imagen cubra el espacio sin deformarse */
+}
+
+.about-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Ajuste para el texto en la columna derecha */
+.about-section .col-md-6 {
+  text-align: left;
+}
+
+.about-section .lead {
+  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+  /* Un color de texto ligeramente más suave */
+}
+
+/* --- Estilos adicionales para las ilustraciones --- */
+
+.service-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.services-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mejoras para elementos con ilustraciones */
+.hero-text-content h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Estilos para la biografía en la sección Sobre Mí */
+.bio-content p {
+  font-size: 0.9rem; /* Más pequeño para que entre mejor */
+  line-height: 1.5; /* Más compacto */
+  margin-bottom: 0.8rem; /* Menos espacio entre párrafos */
+  color: var(--color-text);
+  text-align: justify; /* Justificar texto para mejor aprovechamiento */
+}
+
+.bio-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Contenedor de la biografía */
+.bio-content {
+  max-height: 70vh; /* Limitar altura máxima */
+  overflow-y: auto; /* Scroll si es necesario */
+  padding-right: 10px; /* Espacio para el scrollbar */
+}
+
+/* Centrar el título "Conóceme" */
+.about-section .d-flex.align-items-center {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 1.5rem !important;
+}
+
+.about-section .d-flex.align-items-center h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* Responsive para la biografía */
+@media (max-width: 768px) {
+  .bio-content p {
+    font-size: 0.9rem; /* Reducido de 1rem */
+    line-height: 1.5; /* Reducido de 1.6 */
+    margin-bottom: 0.8rem; /* Reducido de 1rem */
+  }
+  
+  .about-section .d-flex.align-items-center h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 576px) {
+  .bio-content p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.7rem;
+  }
+  
+  .about-section .d-flex.align-items-center h2 {
+    font-size: 1.6rem;
+  }
+}
+/* Tablet - Medium screens */
+@media (max-width: 991px) and (min-width: 769px) {
+  .hero-section {
+    padding: 75px 0 20px 0; /* Intermedio entre desktop y móvil */
+  }
+
+  /* Asegurar que las imágenes cubran toda la pantalla en tablet */
+  .hero-background,
+  .hero-background-image,
+  .hero-overlay {
+    height: 100vh !important;
+  }
+
+  /* Información del retiro en tablet */
+  .hero-content .mb-4.p-4 .d-flex {
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    gap: 1rem !important;
+  }
+
+  .hero-text-content h2 {
+    font-size: 2.5rem !important;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-text-content p {
+    font-size: 1.05rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-image-card {
+    height: 350px;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-carousel .carousel-item img {
+    height: 400px;
+  }
+
+  .service-card {
+    padding: 1.75rem !important;
+  }
+}
+
+/* Mobile - Small screens */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+    padding: 60px 0 20px 0; /* Menos padding abajo */
+  }
+  
+  /* Asegurar que las imágenes cubran toda la pantalla en móvil */
+  .hero-background,
+  .hero-background-image,
+  .hero-overlay {
+    height: 100vh !important;
+  }
+  
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  /* Información del retiro MUY compacta en móvil */
+  .hero-content .mb-4.p-4 {
+    padding: 0.6rem !important;
+    margin-bottom: 1rem !important;
+    border-radius: 8px !important;
+  }
+
+  .hero-content .mb-4.p-4 .d-flex {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+  }
+
+  .hero-content .mb-4.p-4 .text-center {
+    margin-bottom: 0.3rem;
+    width: 100%;
+  }
+
+  .hero-content .mb-4.p-4 small {
+    font-size: 0.65rem !important;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .hero-content .mb-4.p-4 div[style*="fontSize"] {
+    font-size: 0.85rem !important;
+    line-height: 1.2;
+  }
+
+  .hero-content .btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-text-content h2 {
+    font-size: 2rem !important;
+    /* Reducir tamaño en móvil */
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text-content p {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-text-content {
+    text-align: center;
+  }
+
+  .hero-text-content .mb-3 {
+    text-align: center;
+  }
+
+  .hero-text-content .btn {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .hero-image-card {
+    height: 250px;
+    /* Reducir altura en móvil */
+    margin-bottom: 2rem;
+  }
+
+  /* About Section Mobile */
+  .about-section {
+    padding: 2rem 0;
+  }
+
+  .about-carousel {
+    margin-bottom: 2rem;
+  }
+
+  .about-carousel .carousel-item img {
+    height: 300px;
+    /* Reducir altura del carousel en móvil */
+  }
+
+  /* Services Section Mobile */
+  .services-section {
+    padding: 2rem 0 !important;
+  }
+
+  .services-section .d-flex {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .services-section .d-flex h2 {
+    order: 2;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .services-section .d-flex .illustration:first-child {
+    order: 1;
+    margin: 0 0 0.5rem 0 !important;
+  }
+
+  .services-section .d-flex .illustration:last-child {
+    order: 3;
+    margin: 0.5rem 0 0 0 !important;
+  }
+
+  .service-card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem !important;
+  }
+
+  .service-card h4 {
+    font-size: 1.25rem;
+  }
+
+  /* Illustrations Mobile */
+  .illustration {
+    max-width: 60px !important;
+  }
+
+  /* Hide decorative elements on mobile */
+  .illustration-decorative {
+    display: none !important;
+  }
+}
+
+/* Extra Small - Very small screens */
+@media (max-width: 576px) {
+  .hero-section {
+    min-height: 100vh;
+    padding: 50px 0 15px 0; /* Aún más compacto */
+  }
+  
+  /* Asegurar que las imágenes cubran toda la pantalla en extra small */
+  .hero-background,
+  .hero-background-image,
+  .hero-overlay {
+    height: 100vh !important;
+  }
+  
+  .hero-content {
+    padding: 0 0.75rem;
+  }
+
+  /* Información del retiro EXTRA compacta */
+  .hero-content .mb-4.p-4 {
+    padding: 0.5rem !important;
+    margin-bottom: 0.8rem !important;
+    font-size: 0.8rem;
+  }
+
+  .hero-content .mb-4.p-4 .d-flex {
+    gap: 0.3rem !important;
+  }
+
+  .hero-content .mb-4.p-4 small {
+    font-size: 0.6rem !important;
+  }
+
+  .hero-content .mb-4.p-4 div[style*="fontSize"] {
+    font-size: 0.75rem !important;
+  }
+
+  .hero-content .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .hero-text-content h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.3;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text-content p {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-image-card {
+    height: 200px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* About Section Extra Small */
+  .about-section {
+    padding: 1.5rem 0;
+  }
+
+  .about-carousel {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-carousel .carousel-item img {
+    height: 250px;
+  }
+
+  /* Services Section Extra Small */
+  .services-section {
+    padding: 1.5rem 0 !important;
+  }
+
+  .service-card {
+    padding: 1rem !important;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h4 {
+    font-size: 1.1rem;
+  }
+
+  /* Services section title illustrations smaller on very small screens */
+  .services-section .d-flex .illustration {
+    width: 35px !important;
+  }
+
+  /* Illustrations Extra Small */
+  .illustration {
+    max-width: 50px !important;
+  }
+
+  /* Container padding for very small screens */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Animation delays for staggered effect */
+.illustration-fade-in:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.illustration-fade-in:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.illustration-fade-in:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Subtle background pattern */
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, transparent 51%);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.3;
+}

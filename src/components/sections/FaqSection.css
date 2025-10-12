@@ -1,0 +1,105 @@
+/* FAQ Section Styling */
+.faq-section {
+  background-color: var(--color-bg-light, #f8f9fa);
+  position: relative;
+  overflow: hidden;
+}
+
+.faq-section h2 {
+  color: var(--color-text, #333);
+  font-family: var(--font-family-heading, 'Roca Two', serif);
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.faq-section .lead {
+  color: var(--color-text-light, #6c757d);
+  font-family: var(--font-family-body, 'Montserrat', sans-serif);
+  font-weight: 300;
+}
+
+.faq-accordion {
+  position: relative;
+  z-index: 1;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.faq-question:hover {
+  background-color: rgba(235, 190, 111, 0.05);
+  border-left-color: var(--color-primary, #ebbe6f);
+}
+
+.faq-answer {
+  background-color: #fcfaf7;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-family: var(--font-family-body, 'Montserrat', sans-serif);
+  color: var(--color-text, #333);
+  line-height: 1.7;
+}
+
+/* Animation for accordion */
+.faq-answer {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 3rem 0;
+  }
+  
+  .faq-question, .faq-answer {
+    padding: 1.25rem !important;
+  }
+  
+  .faq-section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Custom scrollbar for FAQ answers */
+.faq-answer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.faq-answer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.faq-answer::-webkit-scrollbar-thumb {
+  background: var(--color-primary, #ebbe6f);
+  border-radius: 10px;
+}
+
+.faq-answer::-webkit-scrollbar-thumb:hover {
+  background: #d4a95d;
+}

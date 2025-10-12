@@ -36,6 +36,11 @@ const illustrations = {
   'elemento-mistico-1': elementoMistico1,
   'elemento-mistico-2': elementoMistico2,
   
+  // Alias para nombres que no existen - mapear a ilustraciones similares
+  'flor-crecimiento': broteEspiritual, // Mapea a brote espiritual
+  'luna-intuicion': lunaFina, // Mapea a luna fina
+  'corazon-sanacion': llamaInterior, // Mapea a llama interior
+  
   // Alias para compatibilidad con código existente
   meditation: ojoEspiritual,
   spiritual: llamaInterior,
@@ -49,9 +54,9 @@ const illustrations = {
   element6: redCopoNieve,
   element7: romboPin,
   element8: elementoMistico1,
-  element9: elementoMistico2,
+  element9: estrellaLuz,
   element10: lunaFina180,
-  element11: ojoEspiritual,
+  element11: broteEspiritual,
   element12: llamaInterior,
   element13: broteEspiritual,
   element14: estrellaGuia,

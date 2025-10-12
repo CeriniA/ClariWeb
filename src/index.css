@@ -1,4 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Fuentes locales Roca Two */
+@font-face {
+  font-family: 'Roca Two';
+  src: url('./assets/fonts/RocaTwo-Rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roca Two';
+  src: url('./assets/fonts/RocaTwo-Bl.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roca Two';
+  src: url('./assets/fonts/RocaTwo-It.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roca Two';
+  src: url('./assets/fonts/RocaTwo-Th.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roca Two';
+  src: url('./assets/fonts/RocaTwo-LtIt.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
 
 :root {
   /* Paleta de Colores */
@@ -15,7 +51,7 @@
   --color-text-secondary: #6a5472; /* Púrpura más suave para texto secundario */
 
   /* Sistema Tipográfico */
-  --font-family-heading: 'Petit Formal Script', cursive;
+  --font-family-heading: 'Roca Two', serif;
   --font-family-body: 'Montserrat', sans-serif;
 
   --font-size-h1: 2.5rem;
@@ -24,31 +60,38 @@
   --font-size-base: 1rem;
   --font-size-small: 0.875rem;
   
-  --line-height-base: 1.6; /* Espaciado entre líneas para mejor legibilidad */
 }
 
 body {
   margin: 0;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
+  font-size: var(--font-size-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background);
   color: var(--color-text);
+  line-height: 1.6;
+  padding-top: 0; /* El navbar es fijo, pero el hero es fullscreen */
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Padding para páginas que no son home */
+.page-content {
+  padding-top: 100px; /* Espacio para el navbar fijo */
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding-top: 80px; /* Menos padding en móvil */
+  }
+}
+
+h3, h4, h5, h6 {
   font-family: var(--font-family-heading);
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
-
 h1 { font-size: var(--font-size-h1); }
-h2 { font-size: var(--font-size-h2); }
-h3 { font-size: var(--font-size-h3); }
-
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -57,6 +100,11 @@ p {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Espaciado para secciones con navbar fijo */
+section {
+  scroll-margin-top: 80px;
 }
 
 /* Responsive Typography */
@@ -103,5 +151,38 @@ html, body {
   .btn-lg {
     padding: 1rem 2rem;
     font-size: 1.1rem;
+  }
+}
+
+/* Animaciones para la sección DESCUBRE TU BRILLO */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación de pulso sutil para las ilustraciones */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 }

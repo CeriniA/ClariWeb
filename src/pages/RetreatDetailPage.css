@@ -1,0 +1,408 @@
+/* RetreatDetailPage.css */
+
+.retreat-detail-page {
+  background: var(--color-background);
+}
+
+/* Hero Section */
+.retreat-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.retreat-hero-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.retreat-hero-image {
+  width: 100%;
+  height: 70vh;
+  min-height: 500px;
+  object-fit: cover;
+}
+
+.retreat-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(67, 48, 74, 0.7) 0%,
+    rgba(129, 83, 111, 0.6) 50%,
+    rgba(117, 166, 168, 0.5) 100%
+  );
+  z-index: 2;
+}
+
+.retreat-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.retreat-hero-title {
+  font-family: var(--font-family-heading);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.retreat-hero-subtitle {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.retreat-hero-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.retreat-hero-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.retreat-hero-info-item .icon {
+  font-size: 1.5rem;
+}
+
+.retreat-hero-info-item small {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.retreat-hero-info-item div {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Secciones de contenido */
+.retreat-section-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  background: white;
+  overflow: hidden;
+}
+
+.section-title {
+  color: var(--color-text);
+  font-family: var(--font-family-heading);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.retreat-description {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.retreat-description p {
+  margin-bottom: 1.2rem;
+}
+
+/* Sidebar */
+.retreat-sidebar {
+  position: relative;
+}
+
+.retreat-booking-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: white;
+  top: 2rem;
+}
+
+.price-section {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(67, 48, 74, 0.1);
+}
+
+.price-label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.price-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.price-currency {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-left: 0.5rem;
+}
+
+.availability-section {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(67, 48, 74, 0.1);
+}
+
+.availability-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.availability-item:last-child {
+  margin-bottom: 0;
+}
+
+.availability-label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.availability-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.retreat-info-card {
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(67, 48, 74, 0.1);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item strong {
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.info-item span {
+  color: var(--color-text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.past-retreat-info {
+  padding: 2rem 0;
+}
+
+.location-info h5 {
+  color: var(--color-primary);
+  font-family: var(--font-family-heading);
+}
+
+/* Botones personalizados */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.8rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(235, 190, 111, 0.4);
+}
+
+.btn-outline-success {
+  border-color: #28a745;
+  color: #28a745;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* Carrusel del hero */
+.retreat-hero .carousel-control-prev,
+.retreat-hero .carousel-control-next {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.retreat-hero .carousel-control-prev {
+  left: 30px;
+}
+
+.retreat-hero .carousel-control-next {
+  right: 30px;
+}
+
+.retreat-hero .carousel-control-prev-icon,
+.retreat-hero .carousel-control-next-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.retreat-hero .carousel-indicators {
+  bottom: 30px;
+}
+
+.retreat-hero .carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.retreat-hero .carousel-indicators button.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .retreat-sidebar {
+    margin-top: 2rem;
+  }
+  
+  .retreat-booking-card {
+    position: static !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .retreat-hero {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .retreat-hero-image {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .retreat-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .retreat-hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .retreat-hero-info {
+    gap: 1rem;
+  }
+  
+  .retreat-hero-info-item {
+    padding: 0.8rem 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .price-amount {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .retreat-hero {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .retreat-hero-image {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .retreat-hero-title {
+    font-size: 2rem;
+  }
+  
+  .retreat-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .retreat-hero-info {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .retreat-hero-info-item {
+    padding: 0.6rem 1rem;
+  }
+  
+  .retreat-hero .carousel-control-prev,
+  .retreat-hero .carousel-control-next {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .retreat-hero .carousel-control-prev {
+    left: 15px;
+  }
+  
+  .retreat-hero .carousel-control-next {
+    right: 15px;
+  }
+}
