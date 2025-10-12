@@ -59,14 +59,8 @@ const RetreatDetailPage = () => {
     return retreat && new Date(retreat.endDate) < new Date();
   };
 
-  const handleInquiry = async () => {
-    try {
-      await retreatsAPI.incrementInquiry(retreat._id);
-      navigate(`/contacto?retiro=${retreat._id}`);
-    } catch (err) {
-      console.error('Error registrando consulta:', err);
-      navigate(`/contacto?retiro=${retreat._id}`);
-    }
+  const handleInquiry = () => {
+    navigate(`/contacto?retiro=${retreat._id}`);
   };
 
   if (loading) {
@@ -354,13 +348,6 @@ const RetreatDetailPage = () => {
                     <strong>Duración:</strong>
                     <span>{retreat.durationDays} días</span>
                   </div>
-                  
-                  {retreat.inquiryCount > 0 && (
-                    <div className="info-item">
-                      <strong>Consultas:</strong>
-                      <span>{retreat.inquiryCount} personas interesadas</span>
-                    </div>
-                  )}
                 </Card.Body>
               </Card>
             </div>

@@ -290,12 +290,6 @@ const RetreatDetail = () => {
                     <small className="text-muted">Confirmados</small>
                   </div>
                 </Col>
-                <Col>
-                  <div className="border rounded p-2">
-                    <h4 className="mb-0 text-info">{retreat.inquiryCount || 0}</h4>
-                    <small className="text-muted">Consultas</small>
-                  </div>
-                </Col>
               </Row>
 
               {retreat.isFull && (

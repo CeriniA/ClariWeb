@@ -59,8 +59,7 @@ export const retreatsAPI = {
   getHeroData: () => api.get('/retreats/hero-data'),
   create: (data) => api.post('/retreats', data),
   update: (id, data) => api.put(`/retreats/${id}`, data),
-  delete: (id) => api.delete(`/retreats/${id}`),
-  incrementInquiry: (id) => api.post(`/retreats/${id}/inquiry`),
+  delete: (id) => api.delete(`/retreats/${id}`)
 };
 
 // Servicios de leads
