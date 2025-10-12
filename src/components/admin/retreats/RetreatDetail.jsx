@@ -14,7 +14,6 @@ const RetreatDetail = () => {
   const [error, setError] = useState('');
   const [statusWarning, setStatusWarning] = useState(null);
   const [showTokenModal, setShowTokenModal] = useState(false);
-  const [tokenCount, setTokenCount] = useState(1);
   const [generatingTokens, setGeneratingTokens] = useState(false);
   const [tokenSuccess, setTokenSuccess] = useState('');
   const [confirmedLeadsCount, setConfirmedLeadsCount] = useState(0);
@@ -84,7 +83,8 @@ const RetreatDetail = () => {
       setError('');
       setTokenSuccess('');
       
-      const response = await tokensAPI.generateForRetreat(retreat._id, { quantity: tokenCount });
+      // Generar tokens para TODOS los participantes confirmados sin token
+      const response = await tokensAPI.generateForRetreat(retreat._id);
       
       const { tokensGenerated, emailsSent, emailsFailed } = response.data.data;
       
@@ -100,7 +100,6 @@ const RetreatDetail = () => {
       
       setTokenSuccess(successMessage);
       setShowTokenModal(false);
-      setTokenCount(1);
       
       // Recargar el retiro para actualizar estadísticas
       loadRetreat();
@@ -343,12 +342,19 @@ const RetreatDetail = () => {
                 </Button>
                 
                 <Button
-                  variant="outline-info"
+                  variant="info"
                   onClick={() => setShowTokenModal(true)}
-                  disabled={confirmedLeadsCount === 0}
+                  className="me-2"
+                  disabled={retreat.status !== 'completed'}
+                  title={retreat.status !== 'completed' ? 'El retiro debe estar completado para generar tokens' : ''}
                 >
                   🔗 Generar Tokens ({confirmedLeadsCount})
                 </Button>
+                {retreat.status !== 'completed' && (
+                  <small className="text-muted d-block mt-1">
+                    ⚠️ Solo se pueden generar tokens cuando el retiro esté completado
+                  </small>
+                )}
                 
                 <Button
                   as={Link}
@@ -377,33 +383,28 @@ const RetreatDetail = () => {
           
           <Alert variant="info" className="mb-3">
             <strong>ℹ️ Información:</strong><br />
-            Los tokens se generan para los participantes <strong>confirmados</strong> del retiro.
-            Solo se crearán tokens para participantes que aún no tienen uno.
+            Se generarán tokens automáticamente para <strong>TODOS</strong> los participantes confirmados que aún no tengan uno.
+            Los tokens se enviarán por email a cada participante.
           </Alert>
           
           <div className="mb-3">
             <p className="mb-2">
               <strong>Retiro:</strong> {retreat?.title}
             </p>
+            <p className="mb-2">
+              <strong>Estado:</strong> <Badge bg={retreat?.status === 'completed' ? 'primary' : 'secondary'}>
+                {retreat?.status === 'completed' ? 'Completado ✓' : retreat?.status}
+              </Badge>
+            </p>
             <p className="mb-0">
               <strong>Participantes confirmados:</strong> {confirmedLeadsCount}
             </p>
           </div>
           
-          <Form.Group className="mb-3">
-            <Form.Label>Cantidad de tokens a generar</Form.Label>
-            <Form.Control
-              type="number"
-              min="1"
-              max={confirmedLeadsCount || 50}
-              value={tokenCount}
-              onChange={(e) => setTokenCount(parseInt(e.target.value) || 1)}
-              disabled={generatingTokens}
-            />
-            <Form.Text className="text-muted">
-              Deja vacío o usa el máximo para generar tokens para todos los participantes sin token.
-            </Form.Text>
-          </Form.Group>
+          <Alert variant="warning">
+            <strong>⚠️ Importante:</strong><br />
+            Esta acción generará tokens para todos los participantes sin token y enviará emails automáticamente.
+          </Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button 
@@ -416,7 +417,7 @@ const RetreatDetail = () => {
           <Button 
             variant="primary" 
             onClick={handleGenerateTokens}
-            disabled={generatingTokens || tokenCount < 1}
+            disabled={generatingTokens || confirmedLeadsCount === 0}
           >
             {generatingTokens ? (
               <>
@@ -424,7 +425,7 @@ const RetreatDetail = () => {
                 Generando...
               </>
             ) : (
-              `Generar ${tokenCount} Token(es)`
+              `Generar Tokens para Todos (${confirmedLeadsCount})`
             )}
           </Button>
         </Modal.Footer>
