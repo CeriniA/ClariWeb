@@ -17,9 +17,7 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      window.location.href = '/admin/login';
-    }
+    // No redirigir aquí para evitar bucles. ProtectedRoute/AuthContext se encarga.
     return Promise.reject(error);
   }
 );
