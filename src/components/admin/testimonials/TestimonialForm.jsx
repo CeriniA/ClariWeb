@@ -29,7 +29,6 @@ const TestimonialForm = () => {
   const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    console.log('📝 TestimonialForm montado - isEdit:', isEdit, 'id:', id);
     loadRetreats();
     if (isEdit) {
       loadTestimonial();
@@ -41,7 +40,6 @@ const TestimonialForm = () => {
       setLoadingRetreats(true);
       const response = await retreatsAPI.getAll({ limit: 100 });
       setRetreats(response.data.data);
-      console.log('✅ Retiros cargados:', response.data.data.length);
     } catch (err) {
       console.error('Error cargando retiros:', err);
       setError('Error al cargar los retiros. Por favor, recarga la página.');
@@ -136,8 +134,6 @@ const TestimonialForm = () => {
       </div>
     );
   }
-
-  console.log('🎨 Renderizando formulario - Retiros disponibles:', retreats.length);
 
   return (
     <div>

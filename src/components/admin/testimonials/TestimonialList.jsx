@@ -58,7 +58,6 @@ const TestimonialList = () => {
         return acc;
       }, {});
       
-      console.log('🔍 Filtros enviados:', cleanFilters);
       const response = await testimonialsAPI.getAll(cleanFilters);
       setTestimonials(response.data.data);
       setPagination(response.data.pagination);

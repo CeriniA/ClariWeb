@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Alert, Spinner, Form, Button } from 'react-bootstrap';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { testimonialsAPI } from '../services/api';
-import axios from 'axios';
+import { testimonialsAPI, tokensAPI } from '../services/api';
 
 const PublicTestimonialPage = () => {
   const [searchParams] = useSearchParams();
@@ -35,7 +34,7 @@ const PublicTestimonialPage = () => {
   const validateToken = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5001/api/tokens/validate/${token}`);
+      const response = await tokensAPI.validate(token);
       
       if (response.data.success) {
         setTokenData(response.data.data);

@@ -5,36 +5,19 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true, // enviar cookies HttpOnly en todas las requests
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Interceptor para agregar token automáticamente
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    console.log('🔑 Token en localStorage:', token ? 'Existe' : 'No existe');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-      console.log('✅ Token agregado al header');
-    } else {
-      console.log('❌ No hay token disponible');
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// Eliminado: ya no agregamos Authorization desde localStorage; usamos cookies HttpOnly
 
 // Interceptor para manejar errores de autenticación
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
       window.location.href = '/admin/login';
     }
     return Promise.reject(error);
@@ -77,7 +60,8 @@ export const testimonialsAPI = {
   getAll: (params) => api.get('/testimonials', { params }),
   getById: (id) => api.get(`/testimonials/${id}`),
   getFeatured: () => api.get('/testimonials/featured/public'),
-  validateToken: (token) => api.get(`/testimonials/validate/${token}`),
+  // Nota: la validación de token público se realiza vía /tokens/validate/:token
+  validateToken: (token) => api.get(`/tokens/validate/${token}`),
   submitWithToken: (token, data) => api.post(`/testimonials/submit/${token}`, data),
   createPublic: (data) => api.post('/testimonials/public', data), // Con token
   create: (data) => api.post('/testimonials', data), // Admin
@@ -97,6 +81,7 @@ export const settingsAPI = {
 export const tokensAPI = {
   getAll: (params) => api.get('/tokens', { params }),
   getById: (id) => api.get(`/tokens/${id}`),
+  validate: (token) => api.get(`/tokens/validate/${token}`),
   generateForRetreat: (retreatId, data) => api.post(`/tokens/generate/${retreatId}`, data),
   delete: (id) => api.delete(`/tokens/${id}`),
   regenerate: (id) => api.post(`/tokens/${id}/regenerate`),

@@ -13,9 +13,7 @@ const Navbar = () => {
 
   // Función para hacer scroll suave a una sección
   const scrollToSection = (sectionId) => {
-    console.log('Intentando scroll a:', sectionId);
     const element = document.getElementById(sectionId);
-    console.log('Elemento encontrado:', element);
     if (element) {
       const offsetTop = element.offsetTop - 80; // Ajuste para navbar fijo
       window.scrollTo({
@@ -23,8 +21,6 @@ const Navbar = () => {
         behavior: 'smooth'
       });
       setActiveSection(sectionId);
-    } else {
-      console.log('Elemento no encontrado con ID:', sectionId);
     }
   };
 
@@ -92,15 +88,11 @@ const Navbar = () => {
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            {console.log('Ruta actual:', location.pathname)}
             {location.pathname === '/' ? (
               // Enlaces de scroll suave para la landing page
               <>
                 <Nav.Link 
-                  onClick={() => {
-                    console.log('Click en Inicio');
-                    scrollToSection('inicio');
-                  }}
+                  onClick={() => scrollToSection('inicio')}
                   className={activeSection === 'inicio' ? 'active' : ''}
                   style={{ cursor: 'pointer' }}
                 >
@@ -115,10 +107,7 @@ const Navbar = () => {
                   Sobre Mí
                 </Nav.Link>
                 <Nav.Link 
-                  onClick={() => {
-                    console.log('Click en Retiros');
-                    scrollToSection('retiros');
-                  }}
+                  onClick={() => scrollToSection('retiros')}
                   className={activeSection === 'retiros' ? 'active' : ''}
                   style={{ cursor: 'pointer' }}
                 >

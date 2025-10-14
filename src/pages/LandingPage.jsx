@@ -40,10 +40,7 @@ const LandingPage = () => {
 
       // Procesar testimonios
       if (testimonialsResponse.status === 'fulfilled') {
-        console.log('🎯 Testimonios cargados:', testimonialsResponse.value.data);
         setTestimonials(testimonialsResponse.value.data.data);
-      } else {
-        console.error('❌ Error cargando testimonios:', testimonialsResponse.reason);
       }
 
       // Procesar retiros activos
@@ -57,7 +54,6 @@ const LandingPage = () => {
       }
 
     } catch (err) {
-      console.error('Error cargando datos:', err);
       setError('Error al cargar la información');
     } finally {
       setLoading(false);
@@ -65,7 +61,6 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    console.log('LandingPage cargada');
     loadLandingData();
   }, []);
 
