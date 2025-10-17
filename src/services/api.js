@@ -17,7 +17,29 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // No redirigir aquí para evitar bucles. ProtectedRoute/AuthContext se encarga.
+    const code = error?.response?.data?.code;
+    const message = error?.response?.data?.message || 'Ocurrió un error inesperado';
+    let friendly = null;
+    if (code === 'bad_request' && /consulta.*email.*retiro/i.test(message)) {
+      friendly = {
+        title: 'Ya hiciste una consulta',
+        description: 'Ya existe una consulta tuya en este retiro. Si creés que es un error, escribinos por WhatsApp.'
+      };
+    } else if (code === 'bad_request' && /retiro.*completo/i.test(message)) {
+      friendly = {
+        title: 'Sin cupos disponibles',
+        description: 'El retiro está completo. Podés ver otros retiros o escribirnos por WhatsApp.'
+      };
+    } else if (code === 'validation_error') {
+      const details = error?.response?.data?.details;
+      const errors = Array.isArray(details?.errors) ? details.errors.join(' • ') : message;
+      friendly = { title: 'Revisá los datos', description: errors };
+    } else if (code === 'unauthorized') {
+      friendly = { title: 'No autorizado', description: 'Iniciá sesión para continuar.' };
+    } else if (message) {
+      friendly = { title: 'Ups, algo salió mal', description: message };
+    }
+    if (friendly) error.friendly = friendly;
     return Promise.reject(error);
   }
 );

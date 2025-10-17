@@ -77,11 +77,16 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Error enviando consulta:', err);
-      setError(
-        err.response?.data?.error || 
-        err.response?.data?.messages?.join(', ') || 
-        'Error al enviar la consulta. Por favor, intenta nuevamente.'
-      );
+      const f = err?.friendly;
+      if (f) {
+        setError(`${f.title}: ${f.description}`);
+      } else {
+        setError(
+          err.response?.data?.error || 
+          err.response?.data?.messages?.join(', ') || 
+          'Error al enviar la consulta. Por favor, intenta nuevamente.'
+        );
+      }
     } finally {
       setLoading(false);
     }
