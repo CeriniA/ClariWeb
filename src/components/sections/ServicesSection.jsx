@@ -34,7 +34,7 @@ const ServicesSection = () => {
     },
     {
       illustration: "llama-interior",
-      title: "SANACIÓN EMOCIONAL", 
+      title: "CONEXIÓN EMOCIONAL", 
       description: "Libera patrones y sana heridas del alma",
       color: "accent"
     },
@@ -75,6 +75,7 @@ const ServicesSection = () => {
               <h2 style={{ 
                 fontFamily: 'var(--font-family-heading)',
                 color: 'var(--color-text)',
+                fontSize: 'clamp(1.8rem, 4vw, 2.25rem)',
                 margin: 0
               }}>
                 ¿Qué encontrarás en mis retiros?
@@ -235,7 +236,7 @@ const ServicesSection = () => {
               fontStyle: 'italic',
               marginBottom: '2rem'
             }}>
-              Experiencias que transforman
+              Algunas experiencias que compartimos
             </h3>
           </Col>
         </Row>
@@ -292,11 +293,11 @@ const ServicesSection = () => {
         <Row className="mt-5">
           <Col className="text-center">
             <p className="lead mb-4" style={{ color: 'var(--color-text)', fontStyle: 'italic' }}>
-              ¿Listo para vivir esta experiencia transformadora?
+              ¿List@ para vivir esta experiencia transformadora?
             </p>
             <CTAButton 
-              text="Quiero Participar"
-              icon="🌟"
+              text="Quiero ser parte"
+              icon={null}
               size="lg"
             />
           </Col>

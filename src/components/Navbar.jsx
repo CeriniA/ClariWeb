@@ -132,7 +132,7 @@ const Navbar = () => {
                   className={activeSection === 'registro' ? 'active' : ''}
                   style={{ cursor: 'pointer' }}
                 >
-                  Hablemos
+                  Contacto
                 </Nav.Link>
               </>
             ) : (

@@ -35,17 +35,6 @@ Como fundadora de "Soul Experiences", mi propósito es diseñar experiencias que
 
   return (
     <section id="sobre-mi" className="about-section position-relative">
-      {/* Ilustraciones decorativas para la sección About */}
-      <div className="illustration-decorative top-left d-none d-lg-block">
-        <Illustration
-          name="element9"
-          alt="Elemento decorativo"
-          animate={true}
-          style={{ width: '120px', opacity: 0.1 }}
-          color="primary"
-        />
-      </div>
-
       <Container className="py-5">
         <Row className="align-items-center">
           <Col md={6} className="mb-4 mb-md-0">
@@ -63,24 +52,25 @@ Como fundadora de "Soul Experiences", mi propósito es diseñar experiencias que
             </Carousel>
           </Col>
           <Col md={6}>
-            <div className="d-flex align-items-center mb-3">
-              <Illustration
-                name="brote-espiritual"
-                alt="Crecimiento espiritual"
-                style={{ width: '50px', marginRight: '15px' }}
-                color="primary"
-                animate={true}
-              />
-              <h2>Conóceme</h2>
-            </div>
+            <h2 className="mb-3" style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'clamp(1.8rem, 4vw, 2.25rem)' }}>Sobre mí</h2>
             <div className="bio-content">
               {getFormattedBio()}
             </div>
             <Button
-              variant="primary"
+              style={{
+                backgroundColor: '#000',
+                color: '#fff',
+                border: 'none',
+                fontWeight: 'bold'
+              }}
               size="lg"
+              variant="solid"
+
               className="mt-4"
               onClick={handleRetreatsClick}
+
+
+
             >
               Conoce mis retiros
             </Button>

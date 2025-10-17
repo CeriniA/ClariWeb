@@ -39,13 +39,10 @@ const FaqSection = () => {
       <Container>
         <Row className="justify-content-center mb-5">
           <Col lg={8} className="text-center">
-            <div className="position-relative d-inline-block mb-3">
-              <FaQuestionCircle className="text-primary me-2" size={28} />
-              <h2 className="display-5 fw-bold mb-3 d-inline">
-                <span className="font-heading">PREGUNTAS FRECUENTES</span>
-              </h2>
-            </div>
-            <p className="lead text-muted mb-0">Encuentra respuestas a las dudas más comunes</p>
+            <h2 className="fw-bold mb-3" style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'clamp(1.8rem, 4vw, 2.25rem)' }}>
+              Preguntas frecuentes
+            </h2>
+            <p className="lead text-muted mb-0">Encuentra respuesta a las consultas más comunes sobre las experiencias:</p>
             <div className="divider mx-auto my-4" style={{ width: '80px', height: '3px', backgroundColor: 'var(--color-primary)' }}></div>
           </Col>
         </Row>
@@ -75,17 +72,7 @@ const FaqSection = () => {
               </Accordion>
             </div>
 
-            {/* CTA después de las FAQs */}
-            <div className="text-center mt-5">
-              <p className="lead mb-4" style={{ color: 'var(--color-text)', fontStyle: 'italic' }}>
-                ¿Aún tienes dudas? Contáctanos directamente
-              </p>
-              <CTAButton 
-                text="Hacer una Consulta"
-                icon="💬"
-                size="lg"
-              />
-            </div>
+            
           </Col>
         </Row>
       </Container>

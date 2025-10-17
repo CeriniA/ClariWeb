@@ -8,6 +8,23 @@ import { Link } from 'react-router-dom';
 const HeroSection = ({ heroData, error }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const formatLocation = (loc) => {
+    if (!loc) return 'Por confirmar';
+    if (typeof loc === 'string') return loc;
+    try {
+      const { name, city, state, country, address } = loc || {};
+      const parts = [name, city, state, country].filter(Boolean);
+      if (parts.length > 0) return parts.join(', ');
+      if (address) {
+        const cityState = [city, state].filter(Boolean).join(', ');
+        return cityState || address;
+      }
+      return 'Por confirmar';
+    } catch {
+      return 'Por confirmar';
+    }
+  };
+
   // Crear array de retiros con sus imágenes (uno por retiro)
   const getHeroSlides = () => {
     // Si hay retiros activos, usar uno por retiro
@@ -22,7 +39,7 @@ const HeroSection = ({ heroData, error }) => {
         };
       });
     }
-    
+
     // Si hay un retiro activo individual
     if (heroData?.activeRetreat) {
       const heroImageIndex = heroData.activeRetreat.heroImageIndex || 0;
@@ -33,7 +50,7 @@ const HeroSection = ({ heroData, error }) => {
         type: 'active'
       }];
     }
-    
+
     // Si hay retiros pasados, usar uno por retiro
     if (heroData?.pastRetreats?.length > 0) {
       return heroData.pastRetreats.slice(0, 3).map(retreat => {
@@ -46,7 +63,7 @@ const HeroSection = ({ heroData, error }) => {
         };
       });
     }
-    
+
     // Fallback: usar fotos de Clarisa
     return clariPhotos.slice(0, 3).map((photo, index) => ({
       retreat: null,
@@ -66,7 +83,7 @@ const HeroSection = ({ heroData, error }) => {
           title: currentSlide.retreat.title || "Próximo Retiro",
           subtitle: currentSlide.retreat.shortDescription || currentSlide.retreat.description?.substring(0, 200) + "..." || "Experiencia de transformación",
           showRetreatInfo: true,
-          buttonText: "Reservar Lugar",
+          buttonText: "Reservar mi lugar",
           buttonLink: "#contacto",
           retreat: currentSlide.retreat
         };
@@ -133,7 +150,7 @@ const HeroSection = ({ heroData, error }) => {
         {/* Contenido centrado */}
         <div className="hero-content">
           <h1>
-            <HighlightedTitle 
+            <HighlightedTitle
               title={heroContent.title}
               highlightWords={currentSlide.retreat?.highlightWords}
             />
@@ -142,9 +159,9 @@ const HeroSection = ({ heroData, error }) => {
 
           {/* Información adicional del retiro si es activo */}
           {heroContent.showRetreatInfo && heroContent.retreat && (
-            <div className="mb-4 p-4 rounded" style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
+            <div className="mb-2 p-2 rounded" style={{
+              backgroundColor: 'var(--color-primary)',
+              // backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 255, 255, 0.2)'
             }}>
               <div className="d-flex justify-content-center align-items-center gap-4 flex-wrap">
@@ -155,9 +172,9 @@ const HeroSection = ({ heroData, error }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <small style={{ opacity: 0.8 }}>💰 Precio</small>
-                  <div style={{ color: 'var(--color-primary)', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                    ${heroContent.retreat.price?.toLocaleString()} ARS
+                  <small style={{ opacity: 0.8 }}>📍 Ubicación</small>
+                  <div style={{ fontSize: '1.1rem', fontWeight: '500' }}>
+                    {formatLocation(heroContent.retreat.location.city + ', ' + heroContent.retreat.location.state)}
                   </div>
                 </div>
                 <div className="text-center">
@@ -170,12 +187,20 @@ const HeroSection = ({ heroData, error }) => {
             </div>
           )}
 
-          <CTAButton 
+          <CTAButton
             text={heroContent.buttonText}
-            icon="🌟"
+            icon={null}
             size="lg"
+            variant="solid"
+            to={heroContent.showRetreatInfo && heroContent.retreat ? `/retreats/${heroContent.retreat.slug || heroContent.retreat._id}` : null}
+            targetId={!(heroContent.showRetreatInfo && heroContent.retreat) ? 'registro' : null}
+            style={{
+              backgroundColor: 'var(--color-secondary)',
+              border: 'none',
+              fontWeight: 'bold'
+            }}
           />
-          {heroContent.showRetreatInfo && heroContent.retreat && (
+          {/* {heroContent.showRetreatInfo && heroContent.retreat && (
             <div className="mt-3">
               <Link 
                 to={`/retreats/${heroContent.retreat.slug || heroContent.retreat._id}`} 
@@ -185,7 +210,7 @@ const HeroSection = ({ heroData, error }) => {
                 Ver detalle →
               </Link>
             </div>
-          )}
+          )} */}
         </div>
       </section>
     </>

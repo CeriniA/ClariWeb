@@ -15,19 +15,11 @@ const TestimonialsSection = ({ testimonials }) => {
             <Col>
               <div className="text-center mb-4">
                 <div className="d-flex justify-content-center align-items-center mb-3">
-                  <Illustration
-                    name="estrella-esperanza"
-                    alt="Estrella de esperanza"
-                    style={{ width: '45px', marginRight: '12px' }}
-                    color="gold"
-                  />
-                  <h2>Lo que dicen quienes ya vivieron la experiencia</h2>
-                  <Illustration
-                    name="estrella-esperanza"
-                    alt="Estrella de esperanza"
-                    style={{ width: '45px', marginLeft: '12px' }}
-                    color="gold"
-                  />
+                 
+                  <h2 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'clamp(1.8rem, 4vw, 2.25rem)', margin: 0 }}>
+                    Lo que dicen quienes ya vivieron la experiencia
+                  </h2>
+                  
                 </div>
               </div>
 

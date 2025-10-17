@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner, Card } from 'react-bootstrap';
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import { leadsAPI, retreatsAPI } from '../services/api';
 
 const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
@@ -238,7 +238,7 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
                 Enviando...
               </>
             ) : (
-              '✨ Enviar Consulta'
+              'Enviar consulta'
             )}
           </Button>
         </div>
@@ -262,10 +262,10 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
         {/* Título principal de la sección */}
         <Row className="justify-content-center mb-5">
           <Col lg={10} className="text-center">
-            <h2 className="display-5 fw-bold mb-4" style={{ color: 'var(--color-text)' }}>
-              HABLEMOS
+            <p className="lead mb-2">¿List@ para comenzar tu transformación?</p>
+            <h2 className="display-5 fw-bold mb-3" style={{ color: 'var(--color-text)' }}>
+              Hablemos
             </h2>
-            <p className="lead mb-3">¿Listo para comenzar tu transformación?</p>
             <p className="mb-0" style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>
               Completa el formulario o contáctame directamente. Estoy aquí para acompañarte en este hermoso camino de autoconocimiento.
             </p>
@@ -337,6 +337,20 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
                         style={{ fontSize: '0.9rem', fontWeight: 500 }}
                       >
                         holasoul.experiences@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="mb-3 d-flex align-items-start">
+                    <FaPhone size={18} className="me-3 mt-1" style={{ opacity: 0.9 }} />
+                    <div>
+                      <small style={{ opacity: 0.8, display: 'block', marginBottom: '4px' }}>Teléfono</small>
+                      <a 
+                        href="tel:+5493468521966" 
+                        className="text-white text-decoration-none"
+                        style={{ fontSize: '0.9rem', fontWeight: 500 }}
+                      >
+                        +54 9 3468 521966
                       </a>
                     </div>
                   </div>

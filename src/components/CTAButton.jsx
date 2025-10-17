@@ -1,26 +1,60 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CTAButton = ({ 
   text = "Consultar Disponibilidad", 
   variant = "primary", 
   size = "lg",
   className = "",
-  icon = "✨",
-  outline = false
+  icon = "",
+  outline = false,
+  to,
+  href,
+  targetId = 'registro',
+  onClick
 }) => {
-  const scrollToForm = (e) => {
-    e.preventDefault();
-    const formSection = document.getElementById('registro');
-    if (formSection) {
-      const offset = 80; // Offset para el navbar fijo
-      const elementPosition = formSection.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+  const navigate = useNavigate();
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+  const handleClick = (e) => {
+    if (onClick) {
+      return onClick(e);
+    }
+    // Navegación interna
+    if (to) {
+      e.preventDefault();
+      navigate(to);
+      return;
+    }
+    // Navegación externa
+    if (href) {
+      // Permite comportamiento natural de <a> si se usa como enlace externo en el futuro
+      e.preventDefault();
+      window.location.assign(href);
+      return;
+    }
+    // Scroll a sección objetivo
+    if (targetId) {
+      e.preventDefault();
+      const scrollToSection = () => {
+        const section = document.getElementById(targetId) || document.querySelector(`[name="${targetId}"]`);
+        if (section) {
+          const offset = 80; // Offset para el navbar fijo
+          const elementPosition = section.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          return true;
+        }
+        return false;
+      };
+
+      if (!scrollToSection()) {
+        // Si aún no está en el DOM, actualizar el hash y reintentar brevemente
+        if (window.location.hash !== `#${targetId}`) {
+          window.location.hash = `#${targetId}`;
+        }
+        setTimeout(scrollToSection, 100);
+      }
     }
   };
 
@@ -28,17 +62,11 @@ const CTAButton = ({
     <Button
       variant={outline ? `outline-${variant}` : variant}
       size={size}
-      onClick={scrollToForm}
-      className={`cta-button ${className}`}
+      onClick={handleClick}
+      className={`${className}`}
       style={{
-        fontWeight: 600,
-        borderRadius: '50px',
-        padding: size === 'lg' ? '0.75rem 2rem' : '0.5rem 1.5rem',
-        boxShadow: outline ? 'none' : '0 4px 15px rgba(0,0,0,0.1)',
-        transition: 'all 0.3s ease',
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '8px'
+        backgroundColor: "var(--color-secondary)",
+        color: 'white'
       }}
     >
       {icon && <span>{icon}</span>}

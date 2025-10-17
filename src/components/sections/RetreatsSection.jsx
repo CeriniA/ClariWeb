@@ -41,6 +41,20 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
 
   const backgroundImages = getBackgroundImages();
 
+  const formatLocation = (loc) => {
+    if (!loc) return 'Por confirmar';
+    if (typeof loc === 'string') return loc;
+    try {
+      const { name, city, state, country, address } = loc || {};
+      const parts = [name, city, state, country].filter(Boolean);
+      if (parts.length > 0) return parts.join(', ');
+      if (address) return address;
+      return 'Por confirmar';
+    } catch {
+      return 'Por confirmar';
+    }
+  };
+
   // Efecto para cambiar imágenes automáticamente
   useEffect(() => {
     if (backgroundImages.length > 1) {
@@ -64,23 +78,10 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
         <Row className="text-center mb-5">
           <Col>
             <div className="d-flex justify-content-center align-items-center mb-3">
-              <Illustration
-                name="estrella-guia"
-                alt="Estrella guía"
-                style={{ width: '45px', marginRight: '12px' }}
-                className="illustration-fade-in"
-                color="gold"
-              />
-              <h2>Mis Retiros</h2>
-              <Illustration
-                name="luna-fina"
-                alt="Luna espiritual"
-                style={{ width: '45px', marginLeft: '12px' }}
-                className="illustration-fade-in"
-                color="light"
-              />
+
+              <h2 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'clamp(1.8rem, 4vw, 2.25rem)' }}>Mis retiros</h2>
+
             </div>
-            <p className="lead">Experiencias de transformación y autoconocimiento</p>
             <div className="mt-4 mb-4">
               <p style={{
                 fontSize: '1.1rem',
@@ -307,16 +308,18 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                     </Card.Text>
                     <div className="mb-3">
                       <small className="text-muted">📅 {new Date(retreat.startDate).toLocaleDateString('es-ES')} - {new Date(retreat.endDate).toLocaleDateString('es-ES')}</small><br />
-                      <small className="text-muted">💰 ${retreat.price?.toLocaleString()} ARS</small><br />
-                      <small className="text-muted">👥 {retreat.availableSpots} lugares disponibles</small>
+                      <small className="text-muted">📍 {formatLocation(retreat.location)}</small>
                     </div>
-                    <CTAButton
-                      text="Reservar Plaza"
-                      icon="✨"
-                      size="md"
-                    />
-                    <Link to={`/retreats/${retreat.slug || retreat._id}`} className="mt-2">
-                      Ver detalle →
+                    <Link
+                      to={`/retreats/${retreat.slug || retreat._id}`}
+                      className="btn btn-primary w-100"
+                      style={{
+                        backgroundColor: '#6B46C1',
+                        border: 'none',
+                        fontWeight: 700
+                      }}
+                    >
+                      Reservar Mi Lugar
                     </Link>
                   </Card.Body>
                 </Card>
