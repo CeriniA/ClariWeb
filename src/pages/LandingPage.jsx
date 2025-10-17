@@ -74,9 +74,16 @@ const LandingPage = () => {
     );
   }
 
+  const heroDataWithFallback = {
+    ...(heroData || {}),
+    activeRetreats: (heroData?.activeRetreats && heroData.activeRetreats.length > 0)
+      ? heroData.activeRetreats
+      : activeRetreats
+  };
+
   return (
     <>
-      <HeroSection heroData={heroData} error={error} />
+      <HeroSection heroData={heroDataWithFallback} error={error} />
       <AboutSection />
       <RetreatsSection activeRetreats={activeRetreats} pastRetreats={pastRetreats} />
       <ServicesSection />

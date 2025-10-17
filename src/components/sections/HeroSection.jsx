@@ -3,6 +3,7 @@ import { Alert } from 'react-bootstrap';
 import HighlightedTitle from '../HighlightedTitle';
 import CTAButton from '../CTAButton';
 import { getRetreatImage, clariPhotos } from '../../utils/imageHelpers';
+import { Link } from 'react-router-dom';
 
 const HeroSection = ({ heroData, error }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -174,6 +175,17 @@ const HeroSection = ({ heroData, error }) => {
             icon="🌟"
             size="lg"
           />
+          {heroContent.showRetreatInfo && heroContent.retreat && (
+            <div className="mt-3">
+              <Link 
+                to={`/retreats/${heroContent.retreat.slug || heroContent.retreat._id}`} 
+                className="btn btn-outline-light btn-lg"
+                style={{ borderRadius: '50px' }}
+              >
+                Ver detalle →
+              </Link>
+            </div>
+          )}
         </div>
       </section>
     </>

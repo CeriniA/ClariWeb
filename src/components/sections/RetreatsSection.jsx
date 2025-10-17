@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Illustration from '../Illustration';
 import CTAButton from '../CTAButton';
 import { clariPhotos, getRetreatImage } from '../../utils/imageHelpers';
@@ -278,14 +279,29 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
               <Col key={retreat._id} md={4}>
                 <Card className="h-100 shadow-sm">
                   <div style={{ height: '200px', overflow: 'hidden' }}>
-                    <img
-                      src={getRetreatImage(retreat.images?.[0], 0, 'medium') || clariPhotos[0]}
-                      alt={retreat.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
+                    <Link to={`/retreats/${retreat.slug || retreat._id}`}>
+                      <img
+                        src={getRetreatImage(retreat.images?.[0], 0, 'medium') || clariPhotos[0]}
+                        alt={retreat.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </Link>
                   </div>
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title>{retreat.title}</Card.Title>
+                    <Card.Title>
+                      <Link to={`/retreats/${retreat.slug || retreat._id}`} className="text-decoration-none">
+                        {retreat.title}
+                      </Link>
+                    </Card.Title>
+                    <div className="mb-2">
+                      {retreat.availableSpots === 0 ? (
+                        <Badge bg="danger">Completo</Badge>
+                      ) : retreat.availableSpots <= 3 ? (
+                        <Badge bg="warning">¡Quedan {retreat.availableSpots}!</Badge>
+                      ) : (
+                        <Badge bg="success">Disponible</Badge>
+                      )}
+                    </div>
                     <Card.Text className="flex-grow-1">
                       {retreat.shortDescription || retreat.description?.substring(0, 100) + '...'}
                     </Card.Text>
@@ -299,6 +315,9 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                       icon="✨"
                       size="md"
                     />
+                    <Link to={`/retreats/${retreat.slug || retreat._id}`} className="mt-2">
+                      Ver detalle →
+                    </Link>
                   </Card.Body>
                 </Card>
               </Col>

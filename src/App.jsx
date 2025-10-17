@@ -76,6 +76,14 @@ function App() {
             </DetailLayout>
           } 
         />
+        <Route 
+          path="/retreats/:slug" 
+          element={
+            <DetailLayout>
+              <RetreatDetailPage />
+            </DetailLayout>
+          } 
+        />
         
         {/* Página pública para dejar testimonio con token */}
         <Route 
