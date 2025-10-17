@@ -189,9 +189,9 @@ const RetreatDetailPage = () => {
                   </div> */}
 
                   {!past && (
-                    <div className="retreat-hero-info-item center">
+                    <div className="retreat-hero-info-item text-center">
                       <span className="icon">⏳</span>
-                      <div className="center">
+                      <div className="text-center">
                         <small>Comienza en</small>
                         {remaining?.ms === 0 ? (
                           <div className="fw-bold">¡Comienza hoy!</div>
@@ -213,7 +213,7 @@ const RetreatDetailPage = () => {
                               <div
                                 key={idx}
                                 style={{
-                                  background: 'rgba(255,255,255,0.52)',
+                                  background: 'rgba(255,255,255,0.72)',
                                   border: '1px solid rgba(255,255,255,0.25)',
                                   borderRadius: '12px',
                                   padding: '8px 10px',
