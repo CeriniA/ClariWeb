@@ -136,7 +136,7 @@ const RetreatDetailPage = () => {
       {/* Hero Section con imágenes */}
       <section className="retreat-hero">
         <div className="retreat-hero-images">
-          <Carousel fade interval={5000} controls={true} indicators={true}>
+          <Carousel fade interval={5000} controls={false} indicators={false}>
             {images.map((image, index) => (
               <Carousel.Item key={index}>
                 <img
@@ -189,7 +189,7 @@ const RetreatDetailPage = () => {
                   </div> */}
 
                   {!past && (
-                    <div className="retreat-hero-info-item">
+                    <div className="retreat-hero-info-item center">
                       <span className="icon">⏳</span>
                       <div>
                         <small>Comienza en</small>
