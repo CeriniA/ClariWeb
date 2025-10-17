@@ -191,7 +191,7 @@ const RetreatDetailPage = () => {
                   {!past && (
                     <div className="retreat-hero-info-item center">
                       <span className="icon">⏳</span>
-                      <div>
+                      <div className="center">
                         <small>Comienza en</small>
                         {remaining?.ms === 0 ? (
                           <div className="fw-bold">¡Comienza hoy!</div>
