@@ -182,7 +182,7 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
               <div style={{
                 position: 'absolute',
                 top: '20px',
-                left: '20px',
+                left: 'calc(50% )',
                 animation: 'float 3s ease-in-out infinite',
                 zIndex: 3
               }}>
@@ -194,50 +194,6 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                 />
               </div>
 
-              <div style={{
-                position: 'absolute',
-                top: '30px',
-                right: '30px',
-                animation: 'float 3s ease-in-out infinite 1s',
-                zIndex: 3
-              }}>
-                <Illustration
-                  name="corazon-sanacion"
-                  alt="Corazón"
-                  style={{ width: '35px', opacity: 0.8 }}
-                  color="white"
-                />
-              </div>
-
-              <div style={{
-                position: 'absolute',
-                bottom: '20px',
-                left: '50px',
-                animation: 'float 3s ease-in-out infinite 2s',
-                zIndex: 3
-              }}>
-                <Illustration
-                  name="luna-intuicion"
-                  alt="Luna"
-                  style={{ width: '30px', opacity: 0.7 }}
-                  color="white"
-                />
-              </div>
-
-              <div style={{
-                position: 'absolute',
-                bottom: '30px',
-                right: '40px',
-                animation: 'float 3s ease-in-out infinite 0.5s',
-                zIndex: 3
-              }}>
-                <Illustration
-                  name="flor-crecimiento"
-                  alt="Flor"
-                  style={{ width: '38px', opacity: 0.8 }}
-                  color="white"
-                />
-              </div>
 
               {/* Contenido principal */}
               <div style={{
