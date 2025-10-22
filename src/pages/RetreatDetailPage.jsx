@@ -545,11 +545,28 @@ const RetreatDetailPage = () => {
                   {!past ? (
                     <>
                       <div className="price-section mb-4">
-                        <div className="price-label">Precio por persona</div>
+                        <div className="price-label">{retreat.activePricingTier ? 'Precio actual' : 'Precio por persona'}</div>
                         <div className="price-amount">
-                          ${retreat.price?.toLocaleString()}
-                          <span className="price-currency">ARS</span>
+                          ${(
+                            typeof retreat.effectivePrice === 'number' 
+                              ? retreat.effectivePrice 
+                              : retreat.price
+                          )?.toLocaleString()}
+                          <span className="price-currency">{retreat.currency || 'ARS'}</span>
                         </div>
+                        {retreat.activePricingTier && (
+                          <div className="text-muted small mt-1">
+                            {(retreat.activePricingTier.name || 'Promoción')}{' '}
+                            {retreat.activePricingTier.validUntil && (
+                              <>hasta {formatDateShort(retreat.activePricingTier.validUntil)}</>
+                            )}
+                          </div>
+                        )}
+                        {retreat.activePricingTier && typeof retreat.price === 'number' && retreat.price !== retreat.effectivePrice && (
+                          <div className="text-muted small">
+                            Precio regular: <span style={{ textDecoration: 'line-through' }}>${retreat.price.toLocaleString()}</span> {retreat.currency || 'ARS'}
+                          </div>
+                        )}
                       </div>
 
                       <div className="availability-section mb-4">

@@ -172,7 +172,20 @@ const RetreatList = () => {
                         </div>
                       </td>
                       <td>
-                        <strong>{formatPrice(retreat.price)}</strong>
+                        <div>
+                          <strong>
+                            {(
+                              typeof retreat.effectivePrice === 'number'
+                                ? retreat.effectivePrice
+                                : retreat.price
+                            )?.toLocaleString()}
+                          </strong> {retreat.currency || 'ARS'}
+                        </div>
+                        {retreat.activePricingTier && typeof retreat.price === 'number' && retreat.price !== retreat.effectivePrice && (
+                          <div className="text-muted small">
+                            Precio regular: <span style={{ textDecoration: 'line-through' }}>${retreat.price.toLocaleString()}</span> {retreat.currency || 'ARS'}
+                          </div>
+                        )}
                       </td>
                       <td>
                         <div className="text-center">

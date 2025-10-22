@@ -151,9 +151,20 @@ const Dashboard = () => {
                           <small className="text-muted">Disponibles</small>
                         </div>
                         <div className="col-4">
-                          <strong>${retreat.price?.toLocaleString()}</strong>
+                          <strong>
+                            ${(
+                              typeof retreat.effectivePrice === 'number'
+                                ? retreat.effectivePrice
+                                : retreat.price
+                            )?.toLocaleString()} {retreat.currency || 'ARS'}
+                          </strong>
                           <br />
-                          <small className="text-muted">Precio</small>
+                          <small className="text-muted">{retreat.activePricingTier ? 'Precio actual' : 'Precio'}</small>
+                          {retreat.activePricingTier && typeof retreat.price === 'number' && retreat.price !== retreat.effectivePrice && (
+                            <div className="text-muted small">
+                              <span style={{ textDecoration: 'line-through' }}>${retreat.price.toLocaleString()}</span> {retreat.currency || 'ARS'}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

@@ -264,8 +264,19 @@ const RetreatDetail = () => {
             </Card.Header>
             <Card.Body>
               <div className="text-center mb-3">
-                <h2 className="text-primary mb-0">{formatPrice(retreat.price)}</h2>
-                <small className="text-muted">Precio por persona</small>
+                <h2 className="text-primary mb-0">
+                  {(
+                    typeof retreat.effectivePrice === 'number' 
+                      ? retreat.effectivePrice 
+                      : retreat.price
+                  )?.toLocaleString()} {retreat.currency || 'ARS'}
+                </h2>
+                <small className="text-muted">{retreat.activePricingTier ? 'Precio actual' : 'Precio por persona'}</small>
+                {retreat.activePricingTier && typeof retreat.price === 'number' && retreat.price !== retreat.effectivePrice && (
+                  <div className="text-muted small">
+                    Precio regular: <span style={{ textDecoration: 'line-through' }}>${retreat.price.toLocaleString()}</span> {retreat.currency || 'ARS'}
+                  </div>
+                )}
               </div>
 
               <div className="mb-3">
