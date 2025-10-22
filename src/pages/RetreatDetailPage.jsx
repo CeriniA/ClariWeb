@@ -304,7 +304,7 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <h2 className="section-title mb-0">¿Para quién es este retiro?</h2>
+                    <h2 className="section-title mb-0">Este Retiro es para vos , si:</h2>
                   </div>
                   <ListGroup variant="flush">
                     {retreat.targetAudience.map((item, index) => (

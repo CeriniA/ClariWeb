@@ -78,7 +78,7 @@ const ServicesSection = () => {
                 fontSize: 'clamp(1.8rem, 4vw, 2.25rem)',
                 margin: 0
               }}>
-                Este Retiro es para vos , si :
+                ¿Qué encontrarás en mis retiros?
               </h2>
               {/* <Illustration
                 name="luna-fina"
