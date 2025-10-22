@@ -321,7 +321,7 @@ export const LocationSection = ({ formData, handleChange, handleArrayChange }) =
 );
 
 // Sección de precios
-export const PricingSection = ({ formData, handleChange }) => (
+export const PricingSection = ({ formData, handleChange, handlePricingTiersChange }) => (
   <Card className="mb-4">
     <Card.Header>
       <h5 className="mb-0">💰 Precios e Intercambio</h5>
@@ -367,9 +367,101 @@ export const PricingSection = ({ formData, handleChange }) => (
         </Col>
       </Row>
 
-      <Form.Text className="text-muted mb-3 d-block">
-        💡 <strong>Próximamente:</strong> Podrás configurar precios escalonados con descuentos por fecha
+      <hr />
+      <div className="d-flex justify-content-between align-items-center mb-2">
+        <h6 className="mb-0">Precios escalonados (opcional)</h6>
+        <Button
+          variant="outline-primary"
+          size="sm"
+          onClick={() => handlePricingTiersChange([...
+            (Array.isArray(formData.pricingTiers) ? formData.pricingTiers : []),
+            { name: '', price: '', validUntil: '', paymentOptions: [''] }
+          ])}
+        >
+          + Agregar tier
+        </Button>
+      </div>
+      <Form.Text className="text-muted d-block mb-3">
+        Define descuentos por fecha. Cada tier puede tener un nombre, un precio y una fecha límite.
       </Form.Text>
+
+      {Array.isArray(formData.pricingTiers) && formData.pricingTiers.length > 0 && (
+        <div className="d-flex flex-column gap-3">
+          {formData.pricingTiers.map((tier, index) => {
+            const updateTier = (field, value) => {
+              const tiers = [...formData.pricingTiers];
+              tiers[index] = { ...tiers[index], [field]: value };
+              handlePricingTiersChange(tiers);
+            };
+            const updatePaymentOptions = (values) => {
+              const tiers = [...formData.pricingTiers];
+              tiers[index] = { ...tiers[index], paymentOptions: values };
+              handlePricingTiersChange(tiers);
+            };
+            const removeTier = () => {
+              const tiers = formData.pricingTiers.filter((_, i) => i !== index);
+              handlePricingTiersChange(tiers);
+            };
+
+            return (
+              <Card key={index} className="p-3">
+                <div className="d-flex justify-content-between align-items-start">
+                  <strong>Tier #{index + 1}</strong>
+                  <Button variant="outline-danger" size="sm" onClick={removeTier}>
+                    Eliminar
+                  </Button>
+                </div>
+                <Row className="mt-2">
+                  <Col md={4}>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Nombre</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={tier.name || ''}
+                        onChange={(e) => updateTier('name', e.target.value)}
+                        placeholder="Ej: Anticipadas"
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={4}>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Precio</Form.Label>
+                      <InputGroup>
+                        <InputGroup.Text>$</InputGroup.Text>
+                        <Form.Control
+                          type="number"
+                          value={tier.price ?? ''}
+                          onChange={(e) => updateTier('price', e.target.value)}
+                          placeholder="99999"
+                          min="0"
+                        />
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>
+                  <Col md={4}>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Válido hasta</Form.Label>
+                      <Form.Control
+                        type="date"
+                        value={tier.validUntil ? String(tier.validUntil).slice(0, 10) : ''}
+                        onChange={(e) => updateTier('validUntil', e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <DynamicArrayField
+                  label="Opciones de pago"
+                  values={Array.isArray(tier.paymentOptions) && tier.paymentOptions.length ? tier.paymentOptions : ['']}
+                  onChange={(values) => updatePaymentOptions(values)}
+                  placeholder="Ej: Un pago | 3 cuotas de $X"
+                  fieldName={`pricingTiers.${index}.paymentOptions`}
+                />
+              </Card>
+            );
+          })}
+        </div>
+      )}
     </Card.Body>
   </Card>
 );

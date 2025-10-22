@@ -180,6 +180,13 @@ const RetreatForm = () => {
     }
   };
 
+  const handlePricingTiersChange = (tiers) => {
+    setFormData(prev => ({
+      ...prev,
+      pricingTiers: tiers
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -196,6 +203,18 @@ const RetreatForm = () => {
         notIncludes: formData.notIncludes.filter(item => item.trim() !== ''),
         images: formData.images.filter(item => item.trim() !== ''),
         highlightWords: formData.highlightWords.filter(item => item.trim() !== ''),
+        pricingTiers: Array.isArray(formData.pricingTiers)
+          ? formData.pricingTiers
+              .map(t => ({
+                name: (t?.name || '').trim(),
+                price: t?.price === '' || t?.price === undefined || t?.price === null ? undefined : Number(t.price),
+                validUntil: t?.validUntil ? new Date(t.validUntil) : undefined,
+                paymentOptions: Array.isArray(t?.paymentOptions)
+                  ? t.paymentOptions.filter(opt => typeof opt === 'string' && opt.trim() !== '')
+                  : []
+              }))
+              .filter(t => (t.name || typeof t.price === 'number' || t.validUntil))
+          : [],
         location: {
           ...formData.location,
           features: formData.location.features.filter(item => item.trim() !== '')
@@ -306,6 +325,7 @@ const RetreatForm = () => {
                   <PricingSection 
                     formData={formData} 
                     handleChange={handleChange}
+                    handlePricingTiersChange={handlePricingTiersChange}
                   />
                 </Accordion.Body>
               </Accordion.Item>
