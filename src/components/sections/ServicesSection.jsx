@@ -65,13 +65,13 @@ const ServicesSection = () => {
         <Row className="text-center mb-5">
           <Col>
             <div className="d-flex justify-content-center align-items-center mb-4">
-              <Illustration
+              {/* <Illustration
                 name="estrella-guia"
                 alt="Estrella guía decorativa"
                 style={{ width: '45px', marginRight: '12px' }}
                 className="illustration-fade-in"
                 color="gold"
-              />
+              /> */}
               <h2 style={{ 
                 fontFamily: 'var(--font-family-heading)',
                 color: 'var(--color-text)',
@@ -80,13 +80,13 @@ const ServicesSection = () => {
               }}>
                 ¿Qué encontrarás en mis retiros?
               </h2>
-              <Illustration
+              {/* <Illustration
                 name="luna-fina"
                 alt="Luna espiritual decorativa"
                 style={{ width: '45px', marginLeft: '12px' }}
                 className="illustration-fade-in"
                 color="light"
-              />
+              /> */}
             </div>
           </Col>
         </Row>

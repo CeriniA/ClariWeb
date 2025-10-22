@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Spinner, Alert, Badge, Carousel, ListGroup } from 'react-bootstrap';
 import { retreatsAPI } from '../services/api';
 import { clariPhotos } from '../utils/imageHelpers';
-import Illustration from '../components/Illustration';
 import './RetreatDetailPage.css';
 import LeadRegistrationForm from '../components/LeadRegistrationForm';
 import { Helmet } from 'react-helmet-async';
@@ -256,12 +255,6 @@ const RetreatDetailPage = () => {
             <Card className="retreat-section-card mb-4">
               <Card.Body>
                 <div className="d-flex align-items-center mb-3">
-                  <Illustration
-                    name="ojo-espiritual"
-                    alt="Descripción"
-                    style={{ width: '40px', marginRight: '15px' }}
-                    color="primary"
-                  />
                   <h2 className="section-title mb-0">Sobre esta experiencia</h2>
                 </div>
                 <div className="retreat-description">
@@ -277,12 +270,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="estrella-guia"
-                      alt="Incluye"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="gold"
-                    />
                     <h2 className="section-title mb-0">¿Qué incluye?</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -301,12 +288,6 @@ const RetreatDetailPage = () => {
             <Card className="retreat-section-card mb-4">
               <Card.Body>
                 <div className="d-flex align-items-center mb-3">
-                  <Illustration
-                    name="brote-esperanza"
-                    alt="Ubicación"
-                    style={{ width: '40px', marginRight: '15px' }}
-                    color="primary"
-                  />
                   <h2 className="section-title mb-0">Ubicación</h2>
                 </div>
                 <div className="location-info">
@@ -323,12 +304,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="ojo-espiritual"
-                      alt="Para quién es"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="secondary"
-                    />
                     <h2 className="section-title mb-0">¿Para quién es este retiro?</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -347,12 +322,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="estrella-guia"
-                      alt="Experiencias"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="gold"
-                    />
                     <h2 className="section-title mb-0">Experiencias y actividades</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -371,12 +340,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="brote-esperanza"
-                      alt="No incluye"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="danger"
-                    />
                     <h2 className="section-title mb-0">No incluye</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -395,12 +358,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="estrella-guia"
-                      alt="Precios"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="primary"
-                    />
                     <h2 className="section-title mb-0">Precios escalonados</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -433,12 +390,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="brote-esperanza"
-                      alt="Alimentación"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="success"
-                    />
                     <h2 className="section-title mb-0">Alimentación</h2>
                   </div>
                   {retreat.foodInfo.foodType && (
@@ -461,12 +412,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="ojo-espiritual"
-                      alt="Políticas"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="dark"
-                    />
                     <h2 className="section-title mb-0">Políticas</h2>
                   </div>
                   <ListGroup variant="flush">
@@ -503,12 +448,6 @@ const RetreatDetailPage = () => {
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
-                    <Illustration
-                      name="estrella-guia"
-                      alt="Más del lugar"
-                      style={{ width: '40px', marginRight: '15px' }}
-                      color="info"
-                    />
                     <h2 className="section-title mb-0">Más del lugar</h2>
                   </div>
                   {retreat.location.features && retreat.location.features.length > 0 && (
@@ -617,33 +556,27 @@ const RetreatDetailPage = () => {
                     <>
                       <div className="past-retreat-info">
                         <div className="mb-3">
-                          <Illustration
-                            name="estrella-esperanza"
-                            alt="Completado"
-                            style={{ width: '60px' }}
-                            color="secondary"
-                          />
+                          <h5 className="mb-3">Experiencia Completada</h5>
+                          <p className="text-muted mb-4">
+                            Este retiro se realizó del {formatDateShort(retreat.startDate)} al {formatDateShort(retreat.endDate)}.
+                          </p>
+                          <Button
+                            as={Link}
+                            to="/testimonios"
+                            variant="outline-primary"
+                            className="w-100 mb-2"
+                          >
+                            Ver Testimonios
+                          </Button>
+                          <Button
+                            as={Link}
+                            to="/retiros"
+                            variant="primary"
+                            className="w-100"
+                          >
+                            Ver Retiros Actuales
+                          </Button>
                         </div>
-                        <h5 className="mb-3">Experiencia Completada</h5>
-                        <p className="text-muted mb-4">
-                          Este retiro se realizó del {formatDateShort(retreat.startDate)} al {formatDateShort(retreat.endDate)}.
-                        </p>
-                        <Button
-                          as={Link}
-                          to="/testimonios"
-                          variant="outline-primary"
-                          className="w-100 mb-2"
-                        >
-                          Ver Testimonios
-                        </Button>
-                        <Button
-                          as={Link}
-                          to="/retiros"
-                          variant="primary"
-                          className="w-100"
-                        >
-                          Ver Retiros Actuales
-                        </Button>
                       </div>
                     </>
                   )}
