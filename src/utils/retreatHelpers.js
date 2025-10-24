@@ -170,7 +170,7 @@ export const getRetreatCTA = (retreat) => {
 
   switch (status) {
     case 'completed':
-      return 'Ver Galería y Testimonios';
+      return 'Ver Detalles';
       
     case 'in_progress':
       return 'Retiro en Curso';
