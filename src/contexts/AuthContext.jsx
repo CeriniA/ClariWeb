@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../services/api';
 
 const AuthContext = createContext();
@@ -14,6 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Verificar si hay usuario autenticado al cargar
   useEffect(() => {
@@ -30,6 +32,31 @@ export const AuthProvider = ({ children }) => {
 
     checkAuth();
   }, []);
+
+  // Escuchar evento de token expirado desde el interceptor de axios
+  useEffect(() => {
+    const handleAuthExpired = (event) => {
+      const message = event.detail?.message || 'Tu sesión ha expirado';
+      
+      // Limpiar usuario
+      setUser(null);
+      
+      // Redirigir a login con mensaje
+      navigate('/admin/login', { 
+        replace: true,
+        state: { 
+          sessionExpired: true,
+          message: 'Tu sesión ha expirado. Por favor, iniciá sesión nuevamente.'
+        }
+      });
+    };
+
+    window.addEventListener('auth:expired', handleAuthExpired);
+    
+    return () => {
+      window.removeEventListener('auth:expired', handleAuthExpired);
+    };
+  }, [navigate]);
 
   const login = async (credentials) => {
     try {

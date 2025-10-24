@@ -16,6 +16,7 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/admin/dashboard';
+  const sessionExpiredMessage = location.state?.sessionExpired ? location.state.message : null;
 
   const handleChange = (e) => {
     setFormData({
@@ -51,6 +52,13 @@ const Login = () => {
                 <h2 className="text-primary mb-2">🧘‍♀️ Clari Admin</h2>
                 <p className="text-muted">Panel de administración</p>
               </div>
+
+              {sessionExpiredMessage && (
+                <Alert variant="warning" className="mb-3">
+                  <Alert.Heading className="h6">⏰ Sesión Expirada</Alert.Heading>
+                  {sessionExpiredMessage}
+                </Alert>
+              )}
 
               {error && (
                 <Alert variant="danger" className="mb-3">

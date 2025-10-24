@@ -18,8 +18,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const code = error?.response?.data?.code;
+    const status = error?.response?.status;
     const message = error?.response?.data?.message || 'Ocurrió un error inesperado';
     let friendly = null;
+    
     if (code === 'bad_request' && /consulta.*email.*retiro/i.test(message)) {
       friendly = {
         title: 'Ya hiciste una consulta',
@@ -34,11 +36,28 @@ api.interceptors.response.use(
       const details = error?.response?.data?.details;
       const errors = Array.isArray(details?.errors) ? details.errors.join(' • ') : message;
       friendly = { title: 'Revisá los datos', description: errors };
-    } else if (code === 'unauthorized') {
-      friendly = { title: 'No autorizado', description: 'Iniciá sesión para continuar.' };
+    } else if (status === 401 && code === 'unauthorized') {
+      // Detectar token expirado o inválido
+      if (message.toLowerCase().includes('token expirado') || 
+          message.toLowerCase().includes('token inválido') ||
+          message.toLowerCase().includes('token requerido')) {
+        
+        // Disparar evento para que AuthContext maneje el logout
+        window.dispatchEvent(new CustomEvent('auth:expired', { 
+          detail: { message } 
+        }));
+        
+        friendly = {
+          title: 'Sesión expirada',
+          description: 'Tu sesión ha expirado. Por favor, iniciá sesión nuevamente.'
+        };
+      } else {
+        friendly = { title: 'No autorizado', description: 'Iniciá sesión para continuar.' };
+      }
     } else if (message) {
       friendly = { title: 'Ups, algo salió mal', description: message };
     }
+    
     if (friendly) error.friendly = friendly;
     return Promise.reject(error);
   }
