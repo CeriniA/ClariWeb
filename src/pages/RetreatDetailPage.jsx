@@ -560,7 +560,7 @@ const RetreatDetailPage = () => {
                         <Button
                           href={`https://wa.me/${retreat.whatsappNumber}?text=${encodeURIComponent(`Hola! Me interesa el retiro "${retreat.title}"`)}`}
                           external
-                          outline="success"
+                          variant="success"
                           size="sm"
                           fullWidth
                           icon="💬"
@@ -579,7 +579,7 @@ const RetreatDetailPage = () => {
                           </p>
                           <Button
                             to="/#testimonios"
-                            outline="primary"
+                            variant="primary"
                             fullWidth
                             className="mb-2"
                           >

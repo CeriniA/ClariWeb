@@ -193,7 +193,7 @@ const HeroSection = ({ heroData, error }) => {
           )}
 
           <Button
-            variant="secondary"
+            variant="primary"
             size="lg"
             to={heroContent.showRetreatInfo && heroContent.retreat ? `/retreats/${heroContent.retreat.slug || heroContent.retreat._id}` : null}
             onClick={!(heroContent.showRetreatInfo && heroContent.retreat) ? () => {
