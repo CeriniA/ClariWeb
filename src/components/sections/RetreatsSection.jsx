@@ -268,17 +268,13 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                       <small className="text-muted">📅 {new Date(retreat.startDate).toLocaleDateString('es-ES')} - {new Date(retreat.endDate).toLocaleDateString('es-ES')}</small><br />
                       <small className="text-muted">📍 {formatLocation(retreat.location)}</small>
                     </div>
-                    <Link
+                    <Button
                       to={`/retreats/${retreat.slug || retreat._id}`}
-                      className="btn btn-primary w-100"
-                      style={{
-                        backgroundColor: '#6B46C1',
-                        border: 'none',
-                        fontWeight: 700
-                      }}
+                      variant="primary"
+                      fullWidth
                     >
                       {getRetreatCTA(retreat)}
-                    </Link>
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>
@@ -294,7 +290,7 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                   Estamos preparando experiencias únicas para ti. Mantente informado sobre nuestros próximos retiros.
                 </p>
                 <Button
-                  variant="secondary"
+                  variant="primary"
                   size="lg"
                   icon="📬"
                   onClick={() => {

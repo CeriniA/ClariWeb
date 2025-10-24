@@ -296,7 +296,7 @@ const ServicesSection = () => {
               ¿List@ para vivir esta experiencia transformadora?
             </p>
             <Button 
-              variant="secondary"
+              variant="primary"
               size="lg"
               onClick={() => {
                 const section = document.getElementById('registro');

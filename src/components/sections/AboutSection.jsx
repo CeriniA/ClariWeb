@@ -58,7 +58,7 @@ Como fundadora de "Soul Experiences", mi propósito es diseñar experiencias que
               {getFormattedBio()}
             </div>
             <Button
-              variant="dark"
+              variant="primary"
               size="lg"
               className="mt-4"
               onClick={handleRetreatsClick}
