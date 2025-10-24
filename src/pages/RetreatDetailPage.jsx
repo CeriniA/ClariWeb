@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Button, Spinner, Alert, Badge, Carousel, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert, Badge, Carousel, ListGroup } from 'react-bootstrap';
+import Button from '@/components/ui/Button';
 import { retreatsAPI } from '../services/api';
 import { clariPhotos } from '../utils/imageHelpers';
+import { getRetreatStatus, getRetreatBadge, isPastRetreat } from '../utils/retreatHelpers';
 import './RetreatDetailPage.css';
 import LeadRegistrationForm from '../components/LeadRegistrationForm';
 import { Helmet } from 'react-helmet-async';
@@ -85,10 +87,6 @@ const RetreatDetailPage = () => {
     return retreat?.images && retreat.images.length > 0 ? retreat.images : clariPhotos;
   };
 
-  const isPastRetreat = () => {
-    return retreat && new Date(retreat.endDate) < new Date();
-  };
-
   const handleInquiry = () => {
     const el = document.getElementById('consulta-form');
     if (el) {
@@ -113,7 +111,7 @@ const RetreatDetailPage = () => {
         <Alert variant="danger" className="text-center">
           <h4>¡Oops!</h4>
           <p>{error || 'No se pudo cargar el retiro'}</p>
-          <Button as={Link} to="/retiros" variant="primary">
+          <Button to="/#retiros" variant="primary">
             Volver a Retiros
           </Button>
         </Alert>
@@ -122,7 +120,9 @@ const RetreatDetailPage = () => {
   }
 
   const images = getRetreatImages();
-  const past = isPastRetreat();
+  const past = isPastRetreat(retreat);
+  const status = getRetreatStatus(retreat);
+  const badge = getRetreatBadge(retreat);
 
 
   return (
@@ -187,58 +187,72 @@ const RetreatDetailPage = () => {
                     </div>
                   </div> */}
 
-                  {!past && (
-                    <div className="retreat-hero-info-item text-center">
-                      <span className="icon">⏳</span>
-                      <div className="text-center">
-                        <small>Comienza en</small>
-                        {remaining?.ms === 0 ? (
-                          <div className="fw-bold">¡Comienza hoy!</div>
-                        ) : (
-                          <div
-                            style={{
-                              display: 'flex',
-                              gap: '10px',
-                              alignItems: 'center',
-                              marginTop: '6px'
-                            }}
-                          >
-                            {[
-                              { v: pad2(remaining?.days), l: 'días' },
-                              { v: pad2(remaining?.hours), l: 'horas' },
-                              { v: pad2(remaining?.minutes), l: 'min' },
-                              { v: pad2(remaining?.seconds), l: 'seg' }
-                            ].map((item, idx) => (
-                              <div
-                                key={idx}
-                                style={{
-                                  background: 'rgba(255,255,255,0.72)',
-                                  border: '1px solid rgba(255,255,255,0.25)',
-                                  borderRadius: '12px',
-                                  padding: '8px 10px',
-                                  minWidth: '64px',
-                                  textAlign: 'center',
-                                  backdropFilter: 'blur(6px)'
-                                }}
-                              >
-                                <div style={{ color: 'var(--color-primary)', fontSize: '1.25rem', fontWeight: 700, lineHeight: 1 }}>
-                                  {item.v}
-                                </div>
-                                <div style={{ color: 'var(--color-primary)', fontSize: '0.7rem', opacity: 0.85 }}>{item.l}</div>
-                              </div>
-                            ))}
+                  <div className="retreat-hero-info-item text-center">
+                    {past ? (
+                      <>
+                        <span className="icon">✨</span>
+                        <div className="text-center">
+                          <Badge bg={badge.variant} className="fs-6 px-3 py-2">
+                            {badge.icon} {badge.text}
+                          </Badge>
+                          <div className="mt-2 text-white">
+                            <small>
+                              {formatDate(retreat.startDate)} - {formatDate(retreat.endDate)}
+                            </small>
                           </div>
-                        )}
-                        <div className="mt-2">
-                          {retreat.availableSpots === 0 ? (
-                            <Badge bg="danger">Completo</Badge>
-                          ) : retreat.availableSpots <= 3 ? (
-                            <Badge bg="warning">¡Quedan {retreat.availableSpots}!</Badge>
-                          ) : null}
                         </div>
-                      </div>
-                    </div>
-                  )}
+                      </>
+                    ) : (
+                      <>
+                        <span className="icon">⏳</span>
+                        <div className="text-center">
+                          <small>Comienza en</small>
+                          {remaining?.ms === 0 ? (
+                            <div className="fw-bold">¡Comienza hoy!</div>
+                          ) : (
+                            <div
+                              style={{
+                                display: 'flex',
+                                gap: '10px',
+                                alignItems: 'center',
+                                marginTop: '6px'
+                              }}
+                            >
+                              {[
+                                { v: pad2(remaining?.days), l: 'días' },
+                                { v: pad2(remaining?.hours), l: 'horas' },
+                                { v: pad2(remaining?.minutes), l: 'min' },
+                                { v: pad2(remaining?.seconds), l: 'seg' }
+                              ].map((item, idx) => (
+                                <div
+                                  key={idx}
+                                  style={{
+                                    background: 'rgba(255,255,255,0.72)',
+                                    border: '1px solid rgba(255,255,255,0.25)',
+                                    borderRadius: '12px',
+                                    padding: '8px 10px',
+                                    minWidth: '64px',
+                                    textAlign: 'center',
+                                    backdropFilter: 'blur(6px)'
+                                  }}
+                                >
+                                  <div style={{ color: 'var(--color-primary)', fontSize: '1.25rem', fontWeight: 700, lineHeight: 1 }}>
+                                    {item.v}
+                                  </div>
+                                  <div style={{ color: 'var(--color-primary)', fontSize: '0.7rem', opacity: 0.85 }}>{item.l}</div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          <div className="mt-2">
+                            <Badge bg={badge.variant}>
+                              {badge.icon} {badge.text}
+                            </Badge>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
               </Col>
             </Row>
@@ -354,7 +368,7 @@ const RetreatDetailPage = () => {
               </Card>
             )}
 
-            {retreat.pricingTiers && retreat.pricingTiers.length > 0 && (
+            {!past && retreat.pricingTiers && retreat.pricingTiers.length > 0 && (
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
@@ -408,7 +422,7 @@ const RetreatDetailPage = () => {
               </Card>
             )}
 
-            {retreat.policies && (
+            {!past && retreat.policies && (
               <Card className="retreat-section-card mb-4">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-3">
@@ -534,21 +548,24 @@ const RetreatDetailPage = () => {
                         onClick={handleInquiry}
                         variant="primary"
                         size="lg"
-                        className="w-100 mb-3"
+                        fullWidth
                         disabled={retreat.availableSpots === 0}
+                        icon={retreat.availableSpots > 0 ? '📝' : '❌'}
+                        className="mb-3"
                       >
-                        {retreat.availableSpots > 0 ? 'Reservar Plaza' : 'Lista de Espera'}
+                        {retreat.availableSpots > 0 ? 'Consultar Disponibilidad' : 'Sin Cupos'}
                       </Button>
 
                       {retreat.whatsappNumber && (
                         <Button
                           href={`https://wa.me/${retreat.whatsappNumber}?text=${encodeURIComponent(`Hola! Me interesa el retiro "${retreat.title}"`)}`}
-                          target="_blank"
-                          variant="outline-success"
+                          external
+                          outline="success"
                           size="sm"
-                          className="w-100"
+                          fullWidth
+                          icon="💬"
                         >
-                          💬 Consultar por WhatsApp
+                          Consultar por WhatsApp
                         </Button>
                       )}
                     </>
@@ -561,18 +578,17 @@ const RetreatDetailPage = () => {
                             Este retiro se realizó del {formatDateShort(retreat.startDate)} al {formatDateShort(retreat.endDate)}.
                           </p>
                           <Button
-                            as={Link}
-                            to="/testimonios"
-                            variant="outline-primary"
-                            className="w-100 mb-2"
+                            to="/#testimonios"
+                            outline="primary"
+                            fullWidth
+                            className="mb-2"
                           >
                             Ver Testimonios
                           </Button>
                           <Button
-                            as={Link}
-                            to="/retiros"
+                            to="/#retiros"
                             variant="primary"
-                            className="w-100"
+                            fullWidth
                           >
                             Ver Retiros Actuales
                           </Button>
@@ -622,10 +638,11 @@ const RetreatDetailPage = () => {
                           <div className="mt-3">
                             <Button
                               href={`https://wa.me/${retreat.whatsappNumber}?text=Hola! Me interesa el retiro "${retreat.title}"`}
-                              target="_blank"
+                              external
                               variant="success"
+                              icon="💬"
                             >
-                              💬 Escribir por WhatsApp
+                              Escribir por WhatsApp
                             </Button>
                           </div>
                         )}
@@ -643,8 +660,8 @@ const RetreatDetailPage = () => {
         {/* Botón de volver */}
         <Row className="mt-5">
           <Col className="text-center">
-            <Button as={Link} to="/" variant="outline-secondary" size="lg">
-              ← Volver
+            <Button to="/" outline="secondary" size="lg" icon="←">
+              Volver
             </Button>
           </Col>
         </Row>

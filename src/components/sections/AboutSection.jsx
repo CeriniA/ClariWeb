@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Row, Col, Carousel, Button } from 'react-bootstrap';
+import { Container, Row, Col, Carousel } from 'react-bootstrap';
+import Button from '@/components/ui/Button';
 import HighlightedText from '../HighlightedText';
 import Illustration from '../Illustration';
 import { clariPhotos } from '../../utils/imageHelpers';
@@ -57,22 +58,12 @@ Como fundadora de "Soul Experiences", mi propósito es diseñar experiencias que
               {getFormattedBio()}
             </div>
             <Button
-              style={{
-                backgroundColor: '#000',
-                color: '#fff',
-                border: 'none',
-                fontWeight: 'bold'
-              }}
+              variant="dark"
               size="lg"
-              variant="solid"
-
               className="mt-4"
               onClick={handleRetreatsClick}
-
-
-
             >
-              Conoce mis retiros
+              Ver Retiros
             </Button>
           </Col>
         </Row>

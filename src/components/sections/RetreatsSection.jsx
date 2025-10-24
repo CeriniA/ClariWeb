@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Illustration from '../Illustration';
-import CTAButton from '../CTAButton';
+import Button from '@/components/ui/Button';
 import { clariPhotos, getRetreatImage } from '../../utils/imageHelpers';
+import { getRetreatBadge, getRetreatCTA } from '../../utils/retreatHelpers';
 
 const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -251,13 +252,14 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                       </Link>
                     </Card.Title>
                     <div className="mb-2">
-                      {retreat.availableSpots === 0 ? (
-                        <Badge bg="danger">Completo</Badge>
-                      ) : retreat.availableSpots <= 3 ? (
-                        <Badge bg="warning">¡Quedan {retreat.availableSpots}!</Badge>
-                      ) : (
-                        <Badge bg="success">Disponible</Badge>
-                      )}
+                      {(() => {
+                        const badge = getRetreatBadge(retreat);
+                        return (
+                          <Badge bg={badge.variant}>
+                            {badge.icon} {badge.text}
+                          </Badge>
+                        );
+                      })()}
                     </div>
                     <Card.Text className="flex-grow-1">
                       {retreat.shortDescription || retreat.description?.substring(0, 100) + '...'}
@@ -275,7 +277,7 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                         fontWeight: 700
                       }}
                     >
-                      Reservar Mi Lugar
+                      {getRetreatCTA(retreat)}
                     </Link>
                   </Card.Body>
                 </Card>
@@ -291,11 +293,17 @@ const RetreatsSection = ({ activeRetreats, pastRetreats }) => {
                 <p className="text-muted mb-4">
                   Estamos preparando experiencias únicas para ti. Mantente informado sobre nuestros próximos retiros.
                 </p>
-                <CTAButton
-                  text="Mantente Informado"
-                  icon="📬"
+                <Button
+                  variant="secondary"
                   size="lg"
-                />
+                  icon="📬"
+                  onClick={() => {
+                    const section = document.getElementById('registro');
+                    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }}
+                >
+                  Mantente Informado
+                </Button>
               </div>
             </Col>
           </Row>

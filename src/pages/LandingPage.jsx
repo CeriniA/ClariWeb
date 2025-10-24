@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 import { retreatsAPI, settingsAPI, testimonialsAPI } from '../services/api';
 import HeroSection from '../components/sections/HeroSection';
@@ -11,6 +12,7 @@ import LeadRegistrationForm from '../components/LeadRegistrationForm';
 import './LandingPage.css';
 
 const LandingPage = () => {
+  const location = useLocation();
   const [heroData, setHeroData] = useState(null);
   const [settings, setSettings] = useState(null);
   const [testimonials, setTestimonials] = useState([]);
@@ -64,6 +66,38 @@ const LandingPage = () => {
     loadLandingData();
   }, []);
 
+  // Smooth scroll to section if URL contains a hash (e.g., /#retiros)
+  useEffect(() => {
+    const scrollToHash = () => {
+      const rawHash = location.hash || window.location.hash;
+      const hash = rawHash?.replace('#', '');
+      if (!hash) return;
+      // Defer and retry a few times to ensure DOM (and async content) is ready
+      let attempts = 0;
+      const maxAttempts = 8;
+      const tryScroll = () => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const headerOffset = 140; // adjust if navbar/hero covers content
+          const rect = el.getBoundingClientRect();
+          const scrollTop = window.pageYOffset + rect.top - headerOffset;
+          window.scrollTo({ top: Math.max(0, scrollTop), behavior: 'smooth' });
+          return;
+        }
+        if (attempts < maxAttempts) {
+          attempts += 1;
+          setTimeout(tryScroll, 75);
+        }
+      };
+      setTimeout(tryScroll, 0);
+    };
+
+    // Trigger on mount, on hash change, and after loading completes
+    if (!loading) {
+      scrollToHash();
+    }
+  }, [location.hash, loading]);
+
   // Loading state
   if (loading) {
     return (
@@ -85,11 +119,17 @@ const LandingPage = () => {
     <>
       <HeroSection heroData={heroDataWithFallback} error={error} />
       <AboutSection />
-      <RetreatsSection activeRetreats={activeRetreats} pastRetreats={pastRetreats} />
+      <section id="retiros">
+        <RetreatsSection activeRetreats={activeRetreats} pastRetreats={pastRetreats} />
+      </section>
       <ServicesSection />
-      <TestimonialsSection testimonials={testimonials} />
+      <section id="testimonios">
+        <TestimonialsSection testimonials={testimonials} />
+      </section>
       <FaqSection />
-      <LeadRegistrationForm />
+      <section id="registro">
+        <LeadRegistrationForm />
+      </section>
     </>
   );
 };

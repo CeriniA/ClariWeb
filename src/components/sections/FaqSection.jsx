@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Accordion } from 'react-bootstrap';
 import { FaChevronDown, FaChevronUp, FaQuestionCircle } from 'react-icons/fa';
-import CTAButton from '../CTAButton';
 import './FaqSection.css';
 
 const FaqSection = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Illustration from '../Illustration';
-import CTAButton from '../CTAButton';
+import Button from '@/components/ui/Button';
 // Iconos de React Icons para un diseño limpio y moderno
 import { 
   FaHeart, 
@@ -295,11 +295,16 @@ const ServicesSection = () => {
             <p className="lead mb-4" style={{ color: 'var(--color-text)', fontStyle: 'italic' }}>
               ¿List@ para vivir esta experiencia transformadora?
             </p>
-            <CTAButton 
-              text="Quiero ser parte"
-              icon={null}
+            <Button 
+              variant="secondary"
               size="lg"
-            />
+              onClick={() => {
+                const section = document.getElementById('registro');
+                section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
+              Quiero ser parte
+            </Button>
           </Col>
         </Row>
       </Container>

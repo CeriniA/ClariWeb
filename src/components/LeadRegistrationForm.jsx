@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Alert, Spinner, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Alert, Spinner, Card } from 'react-bootstrap';
 import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import Button from '@/components/ui/Button';
 import { leadsAPI, retreatsAPI } from '../services/api';
 
 const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
@@ -229,17 +230,11 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
             variant="primary"
             type="submit"
             size="lg"
-            disabled={loading}
-            className="py-3"
+            fullWidth
+            loading={loading}
+            icon={!loading && '📝'}
           >
-            {loading ? (
-              <>
-                <Spinner animation="border" size="sm" className="me-2" />
-                Enviando...
-              </>
-            ) : (
-              'Enviar consulta'
-            )}
+            {loading ? 'Enviando...' : 'Enviar consulta'}
           </Button>
         </div>
 
@@ -306,22 +301,13 @@ const LeadRegistrationForm = ({ retreatId = null, compact = false }) => {
 
                 {/* Botón de WhatsApp */}
                 <Button 
-                  variant="light" 
+                  variant="success"
                   size="lg"
                   onClick={handleWhatsAppClick}
-                  className="mb-3 py-3 rounded-pill shadow-sm"
-                  style={{
-                    backgroundColor: '#25D366',
-                    border: 'none',
-                    color: 'white',
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '10px'
-                  }}
+                  fullWidth
+                  icon={<FaWhatsapp size={20} />}
+                  className="mb-3"
                 >
-                  <FaWhatsapp size={24} />
                   WhatsApp
                 </Button>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Alert, Spinner, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Alert, Spinner, Form } from 'react-bootstrap';
+import Button from '@/components/ui/Button';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { testimonialsAPI, tokensAPI } from '../services/api';
 
@@ -242,17 +243,12 @@ const PublicTestimonialPage = () => {
                     variant="primary"
                     type="submit"
                     size="lg"
-                    disabled={submitting || formData.comment.length < 50}
-                    className="py-3"
+                    fullWidth
+                    loading={submitting}
+                    disabled={formData.comment.length < 50}
+                    icon={!submitting && '✨'}
                   >
-                    {submitting ? (
-                      <>
-                        <Spinner animation="border" size="sm" className="me-2" />
-                        Enviando...
-                      </>
-                    ) : (
-                      '✨ Enviar Testimonio'
-                    )}
+                    {submitting ? 'Enviando...' : 'Enviar Testimonio'}
                   </Button>
                 </div>
 

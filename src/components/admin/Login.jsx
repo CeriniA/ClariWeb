@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Alert } from 'react-bootstrap';
+import Button from '@/components/ui/Button';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -97,23 +98,10 @@ const Login = () => {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-100"
-                  disabled={loading}
+                  fullWidth
+                  loading={loading}
                 >
-                  {loading ? (
-                    <>
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        className="me-2"
-                      />
-                      Iniciando sesión...
-                    </>
-                  ) : (
-                    'Iniciar Sesión'
-                  )}
+                  {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                 </Button>
               </Form>
 

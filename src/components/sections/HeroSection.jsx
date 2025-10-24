@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import HighlightedTitle from '../HighlightedTitle';
-import CTAButton from '../CTAButton';
+import Button from '@/components/ui/Button';
 import { getRetreatImage, clariPhotos } from '../../utils/imageHelpers';
+import { isPastRetreat } from '../../utils/retreatHelpers';
 import { Link } from 'react-router-dom';
 
 const HeroSection = ({ heroData, error }) => {
@@ -27,21 +28,25 @@ const HeroSection = ({ heroData, error }) => {
 
   // Crear array de retiros con sus imágenes (uno por retiro)
   const getHeroSlides = () => {
-    // Si hay retiros activos, usar uno por retiro
+    // Si hay retiros activos, filtrar los que no han pasado
     if (heroData?.activeRetreats?.length > 0) {
-      return heroData.activeRetreats.map(retreat => {
-        const heroImageIndex = retreat.heroImageIndex || 0;
-        const heroImage = retreat.images?.[heroImageIndex] || retreat.images?.[0];
-        return {
-          retreat,
-          image: heroImage ? getRetreatImage(heroImage, heroImageIndex, 'hero') : clariPhotos[0],
-          type: 'active'
-        };
-      });
+      const validRetreats = heroData.activeRetreats.filter(retreat => !isPastRetreat(retreat));
+      
+      if (validRetreats.length > 0) {
+        return validRetreats.map(retreat => {
+          const heroImageIndex = retreat.heroImageIndex || 0;
+          const heroImage = retreat.images?.[heroImageIndex] || retreat.images?.[0];
+          return {
+            retreat,
+            image: heroImage ? getRetreatImage(heroImage, heroImageIndex, 'hero') : clariPhotos[0],
+            type: 'active'
+          };
+        });
+      }
     }
 
-    // Si hay un retiro activo individual
-    if (heroData?.activeRetreat) {
+    // Si hay un retiro activo individual, verificar que no sea pasado
+    if (heroData?.activeRetreat && !isPastRetreat(heroData.activeRetreat)) {
       const heroImageIndex = heroData.activeRetreat.heroImageIndex || 0;
       const heroImage = heroData.activeRetreat.images?.[heroImageIndex] || heroData.activeRetreat.images?.[0];
       return [{
@@ -91,10 +96,10 @@ const HeroSection = ({ heroData, error }) => {
       case 'past':
         return {
           title: "Soul Experiences",
-          subtitle: "Retiros de transformación y autoconocimiento en la naturaleza",
+          subtitle: "Retiros de transformación y autoconocimiento en la naturaleza. Próximamente nuevas experiencias.",
           showRetreatInfo: false,
-          buttonText: "Conocer Más",
-          buttonLink: "#sobre-mi"
+          buttonText: "Quiero Más Información",
+          buttonLink: "#registro"
         };
 
       default:
@@ -187,19 +192,17 @@ const HeroSection = ({ heroData, error }) => {
             </div>
           )}
 
-          <CTAButton
-            text={heroContent.buttonText}
-            icon={null}
+          <Button
+            variant="secondary"
             size="lg"
-            variant="solid"
             to={heroContent.showRetreatInfo && heroContent.retreat ? `/retreats/${heroContent.retreat.slug || heroContent.retreat._id}` : null}
-            targetId={!(heroContent.showRetreatInfo && heroContent.retreat) ? 'registro' : null}
-            style={{
-              backgroundColor: 'var(--color-secondary)',
-              border: 'none',
-              fontWeight: 'bold'
-            }}
-          />
+            onClick={!(heroContent.showRetreatInfo && heroContent.retreat) ? () => {
+              const section = document.getElementById('registro');
+              section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } : undefined}
+          >
+            {heroContent.buttonText}
+          </Button>
           {/* {heroContent.showRetreatInfo && heroContent.retreat && (
             <div className="mt-3">
               <Link 
