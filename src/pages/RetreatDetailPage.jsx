@@ -122,7 +122,7 @@ const RetreatDetailPage = () => {
   const images = getRetreatImages();
   const past = isPastRetreat(retreat);
   const status = getRetreatStatus(retreat);
-  const badge = getRetreatBadge(retreat);
+  // const badge = getRetreatBadge(retreat);
 
 
   return (
@@ -154,13 +154,13 @@ const RetreatDetailPage = () => {
           <Container>
             <Row className="justify-content-center">
               <Col lg={8} className="text-center text-white">
-                <Badge
+                {/* <Badge
                   bg={past ? 'secondary' : 'success'}
                   className="mb-3 px-3 py-2"
                   style={{ fontSize: '0.9rem' }}
                 >
                   {past ? 'Experiencia Pasada' : 'Disponible Ahora'}
-                </Badge>
+                </Badge> */}
 
                 <h1 className="retreat-hero-title mb-4">
                   {retreat.title}
@@ -245,9 +245,9 @@ const RetreatDetailPage = () => {
                             </div>
                           )}
                           <div className="mt-2">
-                            <Badge bg={badge.variant}>
+                            {/* <Badge bg={badge.variant}>
                               {badge.icon} {badge.text}
-                            </Badge>
+                            </Badge> */}
                           </div>
                         </div>
                       </>
